@@ -1,0 +1,24 @@
+
+.right{
+	 -fx-background-color: #2262C6;
+    -fx-background-radius: 0px 50px 0px 50px;
+}
+.username{
+	-fx-background-color:transparent;
+	-fx-border-color:#ffffff;
+	-fx-border-width: 0px 0px 2px 0px;
+	-fx-text-fill:white;
+}
+.buttone{
+	-fx-background-color:#bbdefb;
+	
+}
+.buttone:hover {
+	-fx-background-color:#00e676;
+	-fx-text-fill:#ffffff;
+}
+.buttone:pressed{
+	-fx-background-color:#1de9b6;
+}
+
+

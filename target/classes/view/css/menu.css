@@ -1,0 +1,20 @@
+.menu{
+	 -fx-background-color: #2262C6;
+	-fx-border-radius: 0px 50px 0px 0px;
+	-fx-background-radius: 0px 50px 0px 0px;
+    -fx-border-color: #F1F2F7;
+}
+.menu:hover{
+	-fx-background-color:#311b92;
+}
+.button{
+	-fx-text-fill:#ffffff;
+	-fx-background-color:transparent;
+}
+.button:hover {
+	-fx-text-fill:#64dd17;
+}
+.button:pressed{
+	-fx-text-fill:#f50057;
+	
+}

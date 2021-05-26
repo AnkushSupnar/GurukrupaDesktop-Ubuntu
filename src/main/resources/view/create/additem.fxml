@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="1013.0" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.create.AddItemController">
+   <children>
+      <SplitPane dividerPositions="0.41444114737883286" layoutX="57.0" layoutY="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane styleClass="sidePane">
+               <children>
+                  <Label layoutX="163.0" layoutY="54.0" text="Add New Item" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <FontAwesomeIcon fill="WHITE" glyphName="DIAMOND" layoutX="207.0" layoutY="46.0" size="30" />
+                  <Label layoutX="10.0" layoutY="109.0" text="Item Name" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="167.0" text="Item Metal" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="222.0" text="Weight" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="11.0" layoutY="282.0" text="Unit" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="379.0" text="Labour Charges" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="428.0" text="Other Charges" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtItemName" layoutX="121.0" layoutY="95.0" prefHeight="39.0" prefWidth="272.0" promptText="Item Name" styleClass="username" stylesheets="@../css/login.css">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="txtMetal" layoutX="126.0" layoutY="153.0" prefHeight="39.0" prefWidth="262.0" promptText="Metal Name" styleClass="username" stylesheets="@../css/login.css">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="txtMetalWeight" layoutX="126.0" layoutY="207.0" onAction="#txtMetalWeightAction" onKeyReleased="#txtMetalKeyRelease" prefHeight="25.0" prefWidth="80.0" promptText="Metal" styleClass="username" stylesheets="@../css/login.css">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="txtOtherWeight" layoutX="214.0" layoutY="207.0" onAction="#txtOtherWeightAction" onKeyReleased="#txtOtherWeightKeyRelease" prefHeight="25.0" prefWidth="80.0" promptText="Other" styleClass="username" stylesheets="@../css/login.css">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="txtNetWeight" editable="false" layoutX="302.0" layoutY="207.0" prefHeight="25.0" prefWidth="80.0" promptText="Total" styleClass="username" stylesheets="@../css/login.css">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="txtUnit" editable="false" layoutX="126.0" layoutY="262.0" prefHeight="39.0" prefWidth="100.0" promptText="Unit" styleClass="username" stylesheets="@../css/login.css" text="Gram">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="txtPurity" layoutX="289.0" layoutY="262.0" prefHeight="39.0" prefWidth="100.0" promptText="in %" styleClass="username" stylesheets="@../css/login.css">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="txtHsn" layoutX="126.0" layoutY="310.0" prefHeight="39.0" prefWidth="100.0" promptText="HSN" styleClass="username" stylesheets="@../css/login.css">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="txtLabour" layoutX="126.0" layoutY="358.0" prefHeight="25.0" prefWidth="208.0" promptText="Labour Charges" styleClass="username" stylesheets="@../css/login.css">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="txtOther" layoutX="126.0" layoutY="408.0" prefHeight="25.0" prefWidth="208.0" promptText="Other Charges" styleClass="username" stylesheets="@../css/login.css">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="btnSave" layoutX="3.0" layoutY="483.0" mnemonicParsing="false" onAction="#btnSaveAction" stylesheets="@../css/button.css" text="SAVE" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="SAVE" size="20" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnEdit" layoutX="106.0" layoutY="483.0" mnemonicParsing="false" onAction="#btnEditAction" stylesheets="@../css/button.css" text="EDIT" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="EDIT" size="20" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnClear" layoutX="204.0" layoutY="483.0" mnemonicParsing="false" onAction="#btnClearAction" stylesheets="@../css/button.css" text="CLEAR" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="ERASER" size="20" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnHome" layoutX="313.0" layoutY="483.0" mnemonicParsing="false" onAction="#btnHomeAction" stylesheets="@../css/button.css" text="HOME" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="HOME" size="20" />
+                     </graphic>
+                  </Button>
+                  <Label layoutX="237.0" layoutY="282.0" text="Purity" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="330.0" text="HSN Code" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0">
+               <children>
+                  <TableView fx:id="table" layoutX="14.0" layoutY="14.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="colSrNo" prefWidth="42.0" text="SrNo" />
+                      <TableColumn fx:id="colHsn" prefWidth="50.0" text="HSN" />
+                      <TableColumn fx:id="colItemName" prefWidth="132.0" text="Item Name" />
+                       <TableColumn fx:id="colMetal" prefWidth="60.0" text="Metal" />
+                       <TableColumn fx:id="colMetalWeight" prefWidth="50.0" text="Metal Weight" />
+                       <TableColumn fx:id="colOtherWeight" prefWidth="50.0" text="Other Weight" />
+                        
+                         <TableColumn fx:id="colUnit" prefWidth="50.0" text="Unit" />
+                         <TableColumn fx:id="colPurity" prefWidth="50.0" text="Purity" />
+                          <TableColumn fx:id="colLabourCharge" prefWidth="100.0" text="Labour Charges" />
+                           <TableColumn fx:id="colOtherCharge" prefWidth="100.0" text="Other Charges" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.home.DashboardController">
+   <children>
+      <BorderPane fx:id="mainPane" layoutX="0.0167410708963871" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="617.0" prefWidth="880.0167410708964" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <AnchorPane prefHeight="552.0" prefWidth="214.0" styleClass="sidebar" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane layoutX="22.0" layoutY="27.0" prefHeight="30.0" prefWidth="180.0" styleClass="labbtn">
+                     <children>
+                        <Label alignment="CENTER" layoutX="50.0" layoutY="7.0" text="DASHBOARD" textFill="#2262c6">
+                           <font>
+                              <Font name="Berlin Sans FB" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <VBox layoutX="33.0" layoutY="74.0" prefHeight="406.0" prefWidth="180.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                     <children>
+                        <HBox prefHeight="30.0" prefWidth="180.0">
+                           <children>
+                              <FontAwesomeIcon fill="#a2bee8" glyphName="USD" size="20" styleClass="menubutton">
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </FontAwesomeIcon>
+                              <Button fx:id="menuTransaction" mnemonicParsing="false" onAction="#menuTransactionAction" prefHeight="38.0" prefWidth="155.0" styleClass="menubutton" text="Transactions">
+                                 <font>
+                                    <Font name="Cambria" size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="180.0">
+                           <children>
+                              <FontAwesomeIcon fill="#a2bee8" glyphName="USERS" size="20" styleClass="menubutton">
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </FontAwesomeIcon>
+                              <Button fx:id="menuCreate" mnemonicParsing="false" onAction="#menuCreate" prefHeight="38.0" styleClass="menubutton" text="Create Master ">
+                                 <font>
+                                    <Font name="Cambria" size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="40.0" prefHeight="30.0" prefWidth="180.0">
+                           <children>
+                              <FontAwesomeIcon fill="#a2bee8" glyphName="BOOK" size="20" styleClass="menubutton">
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </FontAwesomeIcon>
+                              <Button fx:id="menuReport" mnemonicParsing="false" onAction="#menuReportAction" prefHeight="38.0" prefWidth="121.0" styleClass="menubutton" text="Report      ">
+                                 <font>
+                                    <Font name="Cambria" size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="70.0" prefHeight="30.0" prefWidth="180.0">
+                           <children>
+                              <FontAwesomeIcon fill="#a2bee8" glyphName="GEAR" size="20" styleClass="menubutton">
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </FontAwesomeIcon>
+                              <Button fx:id="menuApplication" mnemonicParsing="false" onAction="#menuReportAction" prefHeight="38.0" prefWidth="143.0" styleClass="menubutton" text="Application   ">
+                                 <font>
+                                    <Font name="Cambria" size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </left>
+         <top>
+            <AnchorPane prefHeight="64.0" prefWidth="600.0" styleClass="titlebar" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" layoutY="17.0" text="Gurukrupa Jewellors" textFill="#2262c6">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="#2262c6" glyphName="DIAMOND" size="30" />
+                     </graphic>
+                  </Label>
+                  <TextField fx:id="title" alignment="CENTER" editable="false" layoutX="204.0" layoutY="19.0" opacity="0.5" prefHeight="30.0" prefWidth="222.0" promptText="Title" style="-fx-background-color: transparent; -fx-border-radius: 50px; -fx-border-color: #AEB2C3;" text="Title" AnchorPane.rightAnchor="455.0">
+                     <font>
+                        <Font name="Berlin Sans FB" size="13.0" />
+                     </font>
+                     <effect>
+                        <DropShadow color="#b9b6b6" />
+                     </effect>
+                  </TextField>
+                  <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="740.4285697937012" layoutY="60.0" size="30" AnchorPane.rightAnchor="117.00000190734863" />
+                  <Text fx:id="txtUserName" fill="WHITE" layoutX="769.58203125" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name" wrappingWidth="100.763671875" AnchorPane.rightAnchor="10.654296875">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </top>
+         <stylesheets>
+            <URL value="@../css/dashboard.css" />
+            <URL value="@../css/dashboard.css" />
+         </stylesheets>
+      </BorderPane>
+   </children>
+</AnchorPane>

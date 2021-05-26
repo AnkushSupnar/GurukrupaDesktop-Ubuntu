@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="765.0" stylesheets="@../css/menu.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.transaction.TransactionController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="menu">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <FontAwesomeIcon fill="WHITE" glyphName="USD" layoutX="82.0" layoutY="48.0" size="40" />
+            <VBox layoutX="29.0" layoutY="67.0">
+               <children>
+                  <Button fx:id="btnBilling" mnemonicParsing="false" onAction="#btnBillingAction" text="Billing">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="USD" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnViewAllBills" mnemonicParsing="false" onAction="#btnVIewAllAction" text="View All">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="LIST" />
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

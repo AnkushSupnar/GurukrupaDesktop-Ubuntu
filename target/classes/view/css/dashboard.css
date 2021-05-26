@@ -1,0 +1,41 @@
+.sidebar{
+    -fx-background-color: #2262C6;
+    -fx-background-radius: 0px 50px 0px 50px;
+}
+.labbtn{
+    -fx-text-fill: #2262C6;
+    -fx-background-color: #FEFFFD;
+    -fx-background-radius: 50px;
+}
+.title{
+	-fx-background-color: transparent;
+    -fx-background-radius:50px;
+    -fx-border-color: #AEB2C3;
+}
+.menubutton{
+	-fx-text-fill:#a2bee8;
+	-fx-background-color:transparent;
+}
+.menubutton:hover{
+	-fx-text-fill:#FFFFFF;
+}
+.menubutton:pressed{
+	-fx-text-fill:#a2bee8;
+}
+
+.titlebar{
+	-fx-background-color: #90caf9;
+	-fx-background-radius: 0px 50px 0px 0px;
+}
+.menu{
+	 -fx-border-radius:0px 50px 0px 0px;
+	-fx-border-color:  #F1F2F7;
+	-fx-background-radius: 0px 50px 0px 0px;
+}
+.menuItem{
+	-fx-text-fill:#2262c6;
+}
+.sidePane{
+	-fx-background-color: #673ab7;
+    -fx-background-radius: 0px 50px 0px 50px;
+}
