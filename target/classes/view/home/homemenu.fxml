@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane accessibleText="drawerMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="621.0" prefWidth="215.0" style="-fx-background-color: #F0F7FF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutY="27.0" prefHeight="383.0" prefWidth="50.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+      <JFXButton accessibleText="btnTransaction" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutY="104.0" prefHeight="45.0" prefWidth="227.0" ripplerFill="#1e85d3" text="  TRANSACTION" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="104.0">
+         <graphic>
+            <FontAwesomeIcon fill="#2279bf" glyphName="USD" size="20" />
+         </graphic>
+      </JFXButton>
+      <JFXButton accessibleText="btnCreate" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutY="149.0" prefHeight="45.0" prefWidth="227.0" ripplerFill="#199bf2" text="CREATE MASTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <graphic>
+            <FontAwesomeIcon fill="#2279bf" glyphName="USERS" size="20" />
+         </graphic>
+      </JFXButton>
+      <JFXButton accessibleText="btnReport" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutX="6.0" layoutY="194.0" prefHeight="45.0" prefWidth="227.0" ripplerFill="#199bf2" text="REPORT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <graphic>
+            <FontAwesomeIcon fill="#2279bf" glyphName="BOOK" size="20" />
+         </graphic>
+      </JFXButton>
+      <JFXButton accessibleText="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutY="239.0" prefHeight="45.0" prefWidth="227.0" ripplerFill="#199bf2" text="APP SETTINGS" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <graphic>
+            <FontAwesomeIcon fill="#2279bf" glyphName="GEAR" size="20" />
+         </graphic>
+      </JFXButton>
+      <FontAwesomeIcon fill="#2279bf" glyphName="DIAMOND" layoutX="86.0" layoutY="70.0" size="5em" />
+   </children>
+   <effect>
+      <DropShadow />
+   </effect>
+</AnchorPane>
