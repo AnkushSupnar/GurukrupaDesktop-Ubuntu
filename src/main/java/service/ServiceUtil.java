@@ -16,7 +16,7 @@ public class ServiceUtil {
 	public static HttpResponse<String> callRestApiGet(String url){
 		try {
 			url = url.replace(" ", "%20");
-	    System.out.println("Got in Service util chages "+url);
+	    System.out.println("Got in Service util changes "+url);
 //		request =HttpRequest.newBuilder(URI.create(url))
 //				.header("Content-Type", "application/json")
 //				.GET().build();
@@ -41,6 +41,7 @@ public class ServiceUtil {
 	public static HttpResponse<String> callRestApiPost(String url,String inputJson)
 			throws IOException, InterruptedException
 	{
+		System.out.println("Got in Service util changes "+url);
 		request = HttpRequest.newBuilder(URI.create(url))
 				.header("Content-Type", "application/json")
 				.POST(HttpRequest.BodyPublishers.ofString(inputJson)).build();
@@ -50,6 +51,7 @@ public class ServiceUtil {
 	}
 	public static HttpResponse<String>callRestApiPut(String url,String inputJson) throws IOException, InterruptedException
 	{
+		System.out.println("Got in Service util changes "+url);
 		request = HttpRequest.newBuilder(URI.create(url))
 				.header("Content-Type", "application/json")
 				.PUT(HttpRequest.BodyPublishers.ofString(inputJson)).build();

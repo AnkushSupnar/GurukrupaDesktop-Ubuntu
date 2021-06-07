@@ -22,6 +22,7 @@ public class Main extends Application {
             //pageName="create/AddCustomer";
             //pageName="create/AddBank";
             pageName="transaction/billing";
+            pageName="home/homepage";
             Parent root;
             root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("view/"+pageName+".fxml")));
             Scene scene = new Scene(root);

@@ -53,6 +53,9 @@ public class BillingController implements Initializable {
 	    @FXML private TextField txtAmount;
 	    @FXML private TextField txtTotalCharges;
 	    @FXML private Button btnAdd;
+	    @FXML private Button btnSearch;
+	    @FXML private Button btnClearBill;
+
 	    
 	    @FXML private TableView<TransactionReport> table;
 	    @FXML private TableColumn<TransactionReport,Integer>colSrno;
@@ -91,7 +94,7 @@ public class BillingController implements Initializable {
 	 private SuggestionProvider<String>customerNameProvider;
 	 private ObservableList<TransactionReport>trList = FXCollections.observableArrayList();
 	 private ObservableList<OldBill>billList = FXCollections.observableArrayList();
-
+	private ObservableList<Bill>oldBillList = FXCollections.observableArrayList();
 	 int trid;
 	 long billno;
 	@Override
@@ -121,10 +124,11 @@ public class BillingController implements Initializable {
 		colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
 		table.setItems(trList);
 
+		oldBillList.addAll(billService.getAllBills());
 		colBillno.setCellValueFactory(new PropertyValueFactory<>("billno"));
 		colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
 		colCustomerName.setCellValueFactory(new PropertyValueFactory<>("customername"));
-		colBillAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        colBillAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
 		colRemaining.setCellValueFactory(new PropertyValueFactory<>("remaining"));
 		getOldBillList();
 		tblOld.setItems(billList);
@@ -206,21 +210,6 @@ public class BillingController implements Initializable {
 			btnSave.requestFocus();
 		});
 	}
-
-	private void getOldBillList() {
-		for(Bill bill:billService.getAllBills())
-		{
-			billList.add(new OldBill(
-					bill.getBillno(),
-					bill.getDate(),
-					bill.getCustomer().getFname()+" "+bill.getCustomer().getMname()+" "+bill.getCustomer().getMname(),
-					bill.getAmount(),
-					bill.getAmount()-bill.getPaidamount()
-					));
-		}
-
-	}
-
 	@FXML
 	    void btnNewAction(ActionEvent event) throws IOException {
 		 Stage stage = new Stage();
@@ -240,18 +229,22 @@ public class BillingController implements Initializable {
 				}
 			});
 	    }
-
 	    @FXML
 	    void btnSearchAction(ActionEvent event) {
-	    	if(txtCustomerName.getText().equals(""))
-	    	{
-	    		txtCustomerName.requestFocus();
-	    		return;
-	    	}
-	    	Customer customer = customerService.getCustomerByName(txtCustomerName.getText());
-	    	txtCustomerInfo.setText(customer.toString());
-	    }
-	    @FXML
+			searchCustomer();
+		}
+
+	private void searchCustomer() {
+		if(txtCustomerName.getText().equals(""))
+		{
+			txtCustomerName.requestFocus();
+			return;
+		}
+		Customer customer = customerService.getCustomerByName(txtCustomerName.getText());
+		txtCustomerInfo.setText(customer.toString());
+	}
+
+	@FXML
 	    void btnSearchItemAction(ActionEvent event) {
 	    	try {
 				if(txtItemName.getText().equals(""))
@@ -344,10 +337,42 @@ public class BillingController implements Initializable {
 
 	    	
 	    }
+    @FXML
+    void btnRemoveAction(ActionEvent event) {
+        try {
+            if(table.getSelectionModel().getSelectedItem()!=null)
+            {
+                TransactionReport tr = table.getSelectionModel().getSelectedItem();
+                if(tr!=null)
+                {
+                    trList.remove(tr);
+					manageSrNo();
+                }
+            }
+        }catch(Exception e)
+        {
+            message.showErrorMessage("Unable to Remove Item");
+        }
+    }
+
 	    @FXML
 	    void btnClearAction(ActionEvent event) {
 			clear();
 		}
+	@FXML
+	void btnUpdateAction(ActionEvent event) {
+	try {
+		if(table.getSelectionModel().getSelectedItem()!=null)
+		{
+			txtItemName.setText(table.getSelectionModel().getSelectedItem().getName());
+			btnSearch.fire();
+		}
+	}catch(Exception e)
+	{
+		message.showErrorMessage("Error inUpdating Item");
+	}
+
+	}
 	@FXML
 	void btnSaveAction(ActionEvent event) {
 		if(validateBill()!=1)
@@ -369,30 +394,124 @@ public class BillingController implements Initializable {
 
 
 		bill.setTransaction(transactionReportToTransactionList(bill));
-		try {
-			System.out.println(JsonUtil.convertFromObjectToJson(bill));
 
-
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
 		if(billno==0)
 		{
 			Bill savedBill =billService.saveBill(bill);
 			if(savedBill!=null)
 			{
 				message.showSuccessMessage("Bill no "+savedBill.getBillno()+" Saved Success");
-			}
-			else
+				oldBillList.add(savedBill);
+				billList.add(
+						new OldBill(
+								savedBill.getBillno(),
+								savedBill.getDate(),
+								savedBill.getCustomer().getFname()+" "+savedBill.getCustomer().getMname()+" "+savedBill.getCustomer().getLname(),
+								savedBill.getAmount(),
+								savedBill.getAmount()-savedBill.getPaidamount()
+								));
+            } else {
+                message.showErrorMessage("Error in Saving Bill");
+            }
+        } else {
+            Bill savedBill =billService.updateBill(bill);
+            if (savedBill != null) {
+                message.showSuccessMessage("Bill" + bill.getBillno() + " Update Success");
+                OldBill updated = new OldBill(
+                        savedBill.getBillno(),
+                        savedBill.getDate(),
+                        savedBill.getCustomer().getFname()+" "+savedBill.getCustomer().getMname()+" "+savedBill.getCustomer().getLname(),
+                        savedBill.getAmount(),
+                        savedBill.getAmount()-savedBill.getPaidamount()
+                );
+                int index = billList.indexOf(
+                		billList.stream().filter(
+                				b->b.getBillno()==updated.getBillno()
+								).findAny().orElse(null)
+				);
+                billList.remove(index);
+                billList.add(index,updated);
+                index = oldBillList.indexOf(
+                	oldBillList.stream().filter(
+                			b->b.getBillno()==savedBill.getBillno()
+					).findAny().orElse(null)
+				);
+                oldBillList.remove(index);
+                oldBillList.add(index,savedBill);
+
+            } else {
+                message.showErrorMessage("Error in Updating Bill");
+            }
+        }
+
+    }
+	@FXML
+	void btnClearBillAction(ActionEvent event) {
+		clearBill();
+
+	}
+
+	@FXML
+	void btnUpdateBill(ActionEvent event) {
+		try {
+			if(tblOld.getSelectionModel().getSelectedItem()!=null)
 			{
-				if(billService.updateBill(bill)!=null)
+				OldBill obill = tblOld.getSelectionModel().getSelectedItem();
+				if(obill!=null)
 				{
-					message.showConfirmMessage("Bill Update Success");
+					Bill bill = oldBillToBill(obill);
+					txtCustomerName.setText(
+							bill.getCustomer().getFname()+" "+
+							bill.getCustomer().getMname()+" "+
+							bill.getCustomer().getLname()
+					);
+					searchCustomer();
+					trList.clear();
+					int sr=0;
+					bill.getTransaction().forEach(tr->{
+						trList.add(new TransactionReport(
+						sr,
+						tr.getItem().getItemname(),
+						tr.getItem().getMetal(),
+						tr.getItem().getPurity(),
+						tr.getItem().getMetalweight()+tr.getItem().getOtherweight(),
+						tr.getQuantity(),
+						tr.getItem().getLabouruchareges()+tr.getItem().getOthercharges(),
+						tr.getRate(),
+								((tr.getRate()/10)*
+										tr.getItem().getMetalweight())*
+										tr.getQuantity()+
+								tr.getItem().getLabouruchareges()+tr.getItem().getOthercharges()
+
+						));
+					});
+					manageSrNo();
+					txtDiscount.setText(""+bill.getDiscount());
+					calculateGrandTotal();
+					txtRecivedAmount.setText(""+bill.getPaidamount());
+					lblRemainingAmount.setText(""+(bill.getAmount()-bill.getPaidamount()));
+					billno = bill.getBillno();
 				}
 			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
 		}
-		
 	}
+	private void clearBill() {
+		billno=0;
+		date.setValue(LocalDate.now());
+		txtCustomerName.setText("");
+		txtCustomerInfo.setText("");
+		txtItemName.clear();
+		txtDiscount.setText(""+0);
+		btnClear.fire();
+		trList.clear();
+		calculateGrandTotal();
+		txtRecivedAmount.clear();
+		lblRemainingAmount.setText(""+0.0);
+	}
+
 
 	private int validateBill() {
 		try {
@@ -417,6 +536,18 @@ public class BillingController implements Initializable {
 			if(txtRecivedAmount.getText().isEmpty() || !isNumber(txtRecivedAmount.getText()))
 			{
 				message.showErrorMessage("Enter Received Amount");
+				txtRecivedAmount.requestFocus();
+				return 0;
+			}
+			if(!isNumber(lblRemainingAmount.getText()))
+			{
+				message.showErrorMessage("Enter Received Amount and Press Enter");
+				txtRecivedAmount.requestFocus();
+				return 0;
+			}
+			if(Double.parseDouble(lblRemainingAmount.getText())<0)
+			{
+				message.showErrorMessage("Recived Amount must be less than or equal to Grand Total");
 				txtRecivedAmount.requestFocus();
 				return 0;
 			}
@@ -455,7 +586,7 @@ public class BillingController implements Initializable {
 		txtLabourCharges.setText("");
 		txtOtherCharges.setText("");
 		txtRate.setText("");
-		txtQty.setText("");
+		txtQty.setText(""+1);
 		txtAmount.setText("");
 		txtTotalCharges.setText("");
 		trid = trList.size()+1;
@@ -500,7 +631,6 @@ public class BillingController implements Initializable {
 	    }
 	    private void calculateGrandTotal()
 		{
-			System.out.println("I am Called");
 			double netAmount=0;
 			for(TransactionReport tr:trList)
 			{
@@ -520,5 +650,37 @@ public class BillingController implements Initializable {
 							-Double.parseDouble(txtDiscount.getText())
 					));
 		}
-	    
+	    private void manageSrNo()
+		{
+			int sr=0;
+			for(int i=0;i<trList.size();i++)
+			{
+				trList.get(i).setId(++sr);
+			}
+			calculateGrandTotal();
+		}
+
+	private void getOldBillList() {
+		oldBillList.forEach(bill->{
+			billList.add(billToOldBill(bill));
+		});
+	}
+	private OldBill billToOldBill(Bill bill)
+	{
+		return new OldBill(
+				bill.getBillno(),
+				bill.getDate(),
+				bill.getCustomer().getFname()+" "+
+				bill.getCustomer().getMname()+" "+
+				bill.getCustomer().getLname(),
+				bill.getAmount(),
+				bill.getAmount()-bill.getPaidamount());
+	}
+	private Bill oldBillToBill(OldBill oBill)
+	{
+		return oldBillList.stream()
+				.filter(bill->bill.getBillno()==oBill.getBillno())
+				.findAny()
+				.orElse(null);
+	}
 }

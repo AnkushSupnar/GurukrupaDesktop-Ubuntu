@@ -18,7 +18,7 @@ public class TransactionController implements Initializable {
     @FXML private Button btnViewAllBills;
 
     private Pane pane;
-    private BorderPane home;
+    private AnchorPane home;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -27,8 +27,10 @@ public class TransactionController implements Initializable {
     @FXML
     void btnBillingAction(ActionEvent event) {
         pane = new ViewUtil().getPage("transaction/billing");
-        home = (BorderPane) mainPane.getParent();
-        home.setCenter(pane);
+        home = (AnchorPane) mainPane.getParent();
+        home.getChildren().remove(2);
+        home.getChildren().add(2,pane);
+        pane.setLayoutY(40);
     }
 
     @FXML

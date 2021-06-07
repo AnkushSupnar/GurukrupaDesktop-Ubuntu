@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="667.0" prefWidth="1036.0" stylesheets="@../css/billing.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.transaction.BillingController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="667.0" prefWidth="1325.0" stylesheets="@../css/billing.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.transaction.BillingController">
    <children>
       <SplitPane dividerPositions="0.6073500967117988" layoutX="74.0" layoutY="82.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -67,7 +67,7 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="315.0" layoutY="139.0" mnemonicParsing="false" onAction="#btnSearchItemAction" styleClass="button1" text="SEARCH">
+                  <Button fx:id="btnSearch" layoutX="315.0" layoutY="139.0" mnemonicParsing="false" onAction="#btnSearchItemAction" styleClass="button1" text="SEARCH">
                      <graphic>
                         <FontAwesomeIcon fill="WHITE" glyphName="SEARCH" size="15" />
                      </graphic>
@@ -218,7 +218,7 @@
                               <Insets right="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" styleClass="button1" text="UPDATE">
+                        <Button mnemonicParsing="false" onAction="#btnUpdateAction" styleClass="button1" text="UPDATE">
                            <graphic>
                               <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="15" />
                            </graphic>
@@ -229,7 +229,7 @@
                               <Insets right="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" styleClass="button1" text="REMOVE">
+                        <Button mnemonicParsing="false" onAction="#btnRemoveAction" styleClass="button1" text="REMOVE">
                            <graphic>
                               <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="15" />
                            </graphic>
@@ -279,7 +279,7 @@
                               <Insets right="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" styleClass="button1" text="UPDATE">
+                        <Button mnemonicParsing="false" onAction="#btnUpdateBill" styleClass="button1" text="UPDATE">
                            <graphic>
                               <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="15" />
                            </graphic>
@@ -301,7 +301,7 @@
                               <Insets right="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" styleClass="button1" text="CLEAR">
+                        <Button fx:id="btnClearBill" mnemonicParsing="false" onAction="#btnClearBillAction" styleClass="button1" text="CLEAR">
                            <graphic>
                               <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="15" />
                            </graphic>
@@ -336,13 +336,13 @@
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="448.0" layoutY="5.0" styleClass="label1" text="Net Total" />
+                        <Label layoutX="437.0" layoutY="5.0" styleClass="label1" text="Net Total" />
                         <TextField fx:id="txtNetTotal" layoutX="512.0" prefHeight="30.0" prefWidth="100.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="435.0" layoutY="38.0" styleClass="label1" text="Grand Total" />
+                        <Label layoutX="424.0" layoutY="38.0" styleClass="label1" text="Grand Total" />
                         <TextField fx:id="txtGrandTotal" layoutX="512.0" layoutY="39.0" prefHeight="30.0" prefWidth="100.0">
                            <font>
                               <Font size="14.0" />
@@ -376,17 +376,14 @@
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView fx:id="tblOld" layoutX="14.0" layoutY="14.0" prefHeight="613.0" prefWidth="382.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tblOld" layoutX="14.0" layoutY="14.0" prefHeight="665.0" prefWidth="510.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-48.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="colBillno" prefWidth="75.0" text="Bill No" />
                       <TableColumn fx:id="colDate" prefWidth="75.0" text="Date" />
-                        <TableColumn fx:id="colCustomerName" prefWidth="75.0" text="Customer Name" />
-                        <TableColumn fx:id="colBillAmount" prefWidth="75.0" text="Amount" />
-                        <TableColumn fx:id="colRemaining" prefWidth="75.0" text="Remaining" />
+                        <TableColumn fx:id="colCustomerName" prefWidth="203.0" text="Customer Name" />
+                        <TableColumn fx:id="colBillAmount" prefWidth="72.0" text="Amount" />
+                        <TableColumn fx:id="colRemaining" prefWidth="90.0" text="Remaining" />
                     </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
                   </TableView>
                </children></AnchorPane>
         </items>
