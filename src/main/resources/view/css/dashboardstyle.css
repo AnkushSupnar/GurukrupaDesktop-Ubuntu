@@ -1,0 +1,16 @@
+.root{
+-fx-background-color: #F0F7FF;
+}
+.head{
+-fx-background-color: #304ffe;
+-fx-tex-fill:white;
+}
+.hover_border:hover{
+    -fx-border-color:#304ffe;
+    -fx-border-width:0px 0px 0px 4px;
+    -fx-background-color:#34e7e4e0;
+    -fx-cursor:hand;
+}
+.cursor_hand{
+-fx-cursor:hand;
+}

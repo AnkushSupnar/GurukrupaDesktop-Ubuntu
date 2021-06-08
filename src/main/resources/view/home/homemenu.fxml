@@ -2,39 +2,73 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane accessibleText="drawerMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="621.0" prefWidth="215.0" style="-fx-background-color: #F0F7FF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane accessibleText="drawerMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="621.0" prefWidth="215.0" stylesheets="@../css/dashboardstyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutY="27.0" prefHeight="383.0" prefWidth="50.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <effect>
-            <DropShadow />
-         </effect>
-      </AnchorPane>
-      <JFXButton accessibleText="btnTransaction" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutY="104.0" prefHeight="45.0" prefWidth="227.0" ripplerFill="#1e85d3" text="  TRANSACTION" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="104.0">
+      <JFXButton accessibleText="btnTransaction" alignment="BASELINE_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutY="104.0" prefHeight="45.0" prefWidth="227.0" ripplerFill="#1e85d3" styleClass="hover_border" text="TRANSACTION" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="104.0">
          <graphic>
-            <FontAwesomeIcon fill="#2279bf" glyphName="USD" size="20" />
+            <FontAwesomeIcon fill="#2279bf" glyphName="FILE_TEXT_ALT" size="20" />
          </graphic>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+         <font>
+            <Font name="FontAwesome Regular" size="13.0" />
+         </font>
       </JFXButton>
-      <JFXButton accessibleText="btnCreate" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutY="149.0" prefHeight="45.0" prefWidth="227.0" ripplerFill="#199bf2" text="CREATE MASTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <JFXButton accessibleText="btnCreate" alignment="BASELINE_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutY="149.0" prefHeight="45.0" prefWidth="227.0" ripplerFill="#199bf2" styleClass="hover_border" text="CREATE MASTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <graphic>
-            <FontAwesomeIcon fill="#2279bf" glyphName="USERS" size="20" />
+            <FontAwesomeIcon fill="#2279bf" glyphName="CIRCLE_ALT_NOTCH" size="20" />
          </graphic>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+         <font>
+            <Font name="FontAwesome Regular" size="13.0" />
+         </font>
       </JFXButton>
-      <JFXButton accessibleText="btnReport" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutX="6.0" layoutY="194.0" prefHeight="45.0" prefWidth="227.0" ripplerFill="#199bf2" text="REPORT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <JFXButton accessibleText="btnReport" alignment="BASELINE_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutX="6.0" layoutY="194.0" prefHeight="45.0" prefWidth="227.0" ripplerFill="#199bf2" styleClass="hover_border" text="REPORT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <graphic>
-            <FontAwesomeIcon fill="#2279bf" glyphName="BOOK" size="20" />
+            <FontAwesomeIcon fill="#2279bf" glyphName="NEWSPAPER_ALT" size="20" />
          </graphic>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+         <font>
+            <Font name="FontAwesome Regular" size="13.0" />
+         </font>
       </JFXButton>
-      <JFXButton accessibleText="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutY="239.0" prefHeight="45.0" prefWidth="227.0" ripplerFill="#199bf2" text="APP SETTINGS" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <JFXButton accessibleText="btnSettings" alignment="BASELINE_LEFT" buttonType="RAISED" graphicTextGap="10.0" layoutY="239.0" prefHeight="45.0" prefWidth="227.0" ripplerFill="#199bf2" styleClass="hover_border" text="APP SETTINGS" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <graphic>
-            <FontAwesomeIcon fill="#2279bf" glyphName="GEAR" size="20" />
+            <FontAwesomeIcon fill="#2279bf" glyphName="WRENCH" size="20" />
          </graphic>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+         <font>
+            <Font name="FontAwesome Regular" size="13.0" />
+         </font>
       </JFXButton>
-      <FontAwesomeIcon fill="#2279bf" glyphName="DIAMOND" layoutX="86.0" layoutY="70.0" size="5em" />
+      <VBox alignment="CENTER" layoutX="58.0" layoutY="14.0" prefHeight="98.0" prefWidth="215.0" styleClass="head" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <FontAwesomeIcon fill="WHITE" glyphName="SEND" size="2.4em">
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin></FontAwesomeIcon>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Gurukrupa" wrappingWidth="177.40625">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <font>
+                  <Font name="FontAwesome Regular" size="32.0" />
+               </font></Text>
+         </children>
+      </VBox>
    </children>
-   <effect>
-      <DropShadow />
-   </effect>
 </AnchorPane>
