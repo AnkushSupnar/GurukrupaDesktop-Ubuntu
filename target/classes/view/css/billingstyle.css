@@ -1,0 +1,17 @@
+.button{
+    -fx-background-color:#2196f3;
+    -fx-text-fill:white;
+}
+.button:hover{
+    -fx-background-color:#00e676;
+    -fx-text-fill:black;
+}
+/*.glyph-icon{
+    -fx-fill:white;
+}*/
+.button:hover .glyph-icon{
+    -fx-fill:black;
+}
+.textarea{
+    -fx-background-color:transparent;
+}
