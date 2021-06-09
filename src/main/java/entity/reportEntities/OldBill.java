@@ -7,17 +7,19 @@ public class OldBill {
     LocalDate date;
     String customername;
     double amount;
+    double paid;
     double remaining;
 
     public OldBill() {
         super();
     }
 
-    public OldBill(long billno, LocalDate date, String customername, double amount, double remaining) {
+    public OldBill(long billno, LocalDate date, String customername, double amount,double paid, double remaining) {
         this.billno = billno;
         this.date = date;
         this.customername = customername;
         this.amount = amount;
+        this.paid =paid;
         this.remaining = remaining;
     }
 
@@ -53,6 +55,14 @@ public class OldBill {
         this.amount = amount;
     }
 
+    public double getPaid() {
+        return paid;
+    }
+
+    public void setPaid(double paid) {
+        this.paid = paid;
+    }
+
     public double getRemaining() {
         return remaining;
     }
@@ -68,6 +78,7 @@ public class OldBill {
                 ", date=" + date +
                 ", customername='" + customername + '\'' +
                 ", amount=" + amount +
+                ", paid=" + paid +
                 ", remaining=" + remaining +
                 '}';
     }

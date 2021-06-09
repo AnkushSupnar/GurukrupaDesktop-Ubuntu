@@ -34,6 +34,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import service.*;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 
 public class BillingController implements Initializable {
 
@@ -408,6 +409,7 @@ public class BillingController implements Initializable {
 								savedBill.getDate(),
 								savedBill.getCustomer().getFname()+" "+savedBill.getCustomer().getMname()+" "+savedBill.getCustomer().getLname(),
 								savedBill.getAmount(),
+								savedBill.getPaidamount(),
 								savedBill.getAmount()-savedBill.getPaidamount()
 								));
             } else {
@@ -422,6 +424,7 @@ public class BillingController implements Initializable {
                         savedBill.getDate(),
                         savedBill.getCustomer().getFname()+" "+savedBill.getCustomer().getMname()+" "+savedBill.getCustomer().getLname(),
                         savedBill.getAmount(),
+						savedBill.getPaidamount(),
                         savedBill.getAmount()-savedBill.getPaidamount()
                 );
                 int index = billList.indexOf(
@@ -674,6 +677,7 @@ public class BillingController implements Initializable {
 				bill.getCustomer().getMname()+" "+
 				bill.getCustomer().getLname(),
 				bill.getAmount(),
+				bill.getPaidamount(),
 				bill.getAmount()-bill.getPaidamount());
 	}
 	private Bill oldBillToBill(OldBill oBill)

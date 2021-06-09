@@ -16,24 +16,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1325.0" stylesheets="@../css/billingstyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1325.0" stylesheets="@../css/billingstyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.transaction.BillingFrameController">
    <children>
-      <SplitPane dividerPositions="0.5540438397581254" layoutX="217.0" layoutY="165.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.5238095238095238" layoutX="217.0" layoutY="165.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
                <children>
-                  <Pane layoutX="62.0" layoutY="14.0" prefHeight="35.0" prefWidth="801.0" style="-fx-background-color: #2262C6;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <Text fill="WHITE" layoutX="333.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Daily Billing">
-                           <font>
-                              <Font name="FontAwesome Regular" size="24.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="10.0" layoutY="45.0" prefHeight="345.0" prefWidth="664.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                  <Pane layoutX="10.0" prefHeight="380.0" prefWidth="664.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <effect>
                         <DropShadow />
                      </effect>
@@ -50,15 +40,15 @@
                         </HBox>
                         <HBox layoutX="10.0" layoutY="20.0">
                            <children>
-                              <MFXDatePicker alignment="TOP_CENTER" colorText="true" />
-                              <MFXTextField lineStrokeCap="BUTT" lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="289.0" promptText="Select Customer Name" validated="true">
+                              <MFXDatePicker fx:id="date" alignment="TOP_CENTER" colorText="true" />
+                              <MFXTextField fx:id="txtCustomerName" lineStrokeCap="BUTT" lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="289.0" promptText="Select Customer Name" validated="true">
                                  <HBox.margin>
                                     <Insets left="20.0" top="7.0" />
                                  </HBox.margin>
                               </MFXTextField>
-                              <JFXButton buttonType="RAISED" prefHeight="30.0" text="SEARCH">
+                              <JFXButton buttonType="RAISED" onAction="#btnSearchAction" prefHeight="30.0" text="SEARCH">
                                  <graphic>
-                                    <FontAwesomeIcon fill="WHITE" glyphName="SEARCH_PLUS_ALT" size="20" text="" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="SEARCH_PLUS" size="20" text="" />
                                  </graphic>
                                  <font>
                                     <Font name="Georgia Bold" size="14.0" />
@@ -67,7 +57,7 @@
                                     <Insets left="20.0" top="4.0" />
                                  </HBox.margin>
                               </JFXButton>
-                              <JFXButton buttonType="RAISED" layoutX="431.0" layoutY="14.0" prefHeight="30.0" text="NEW">
+                              <JFXButton buttonType="RAISED" layoutX="431.0" layoutY="14.0" onAction="#btnNewAction" prefHeight="30.0" text="NEW">
                                  <graphic>
                                     <FontAwesomeIcon fill="WHITE" glyphName="PLUS_SQUARE_ALT" size="20" />
                                  </graphic>
@@ -83,7 +73,7 @@
                         <HBox layoutX="10.0" layoutY="60.0">
                            <children>
                               <FontAwesomeIcon fill="#2196f3" glyphName="INFO_CIRCLE" size="4em" />
-                              <TextArea prefHeight="0.0" prefWidth="557.0" promptText="Customer Information" wrapText="true" HBox.hgrow="ALWAYS" />
+                              <TextArea fx:id="txtCustomerInfo" prefHeight="0.0" prefWidth="557.0" promptText="Customer Information" wrapText="true" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                         <Label layoutX="15.0" layoutY="123.0" text="Item Name">
@@ -91,10 +81,10 @@
                               <Font name="FontAwesome Regular" size="14.0" />
                            </font>
                         </Label>
-                        <MFXTextField layoutX="15.0" layoutY="138.0" lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="391.0" promptText="Enter Item Name" />
-                        <JFXButton buttonType="RAISED" layoutX="427.0" layoutY="135.0" prefHeight="30.0" text="SEARCH">
+                        <MFXTextField fx:id="txtItemName" layoutX="15.0" layoutY="138.0" lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="391.0" promptText="Enter Item Name" />
+                        <JFXButton fx:id="btnSearch" buttonType="RAISED" layoutX="427.0" layoutY="135.0" onAction="#btnSearchItemAction" prefHeight="30.0" text="SEARCH">
                            <graphic>
-                              <FontAwesomeIcon fill="WHITE" glyphName="SEARCH_PLUS_ALT" size="20" text="" />
+                              <FontAwesomeIcon fill="WHITE" glyphName="SEARCH_PLUS" size="20" text="" />
                            </graphic>
                            <font>
                               <Font name="Georgia Bold" size="14.0" />
@@ -131,27 +121,27 @@
                         </HBox>
                         <HBox layoutX="10.0" layoutY="196.0">
                            <children>
-                              <MFXTextField lineStrokeWidth="1.0" prefWidth="50.0">
+                              <MFXTextField fx:id="txtMetal" lineStrokeWidth="1.0" prefWidth="50.0">
                                  <HBox.margin>
                                     <Insets right="10.0" />
                                  </HBox.margin>
                               </MFXTextField>
-                              <MFXTextField lineStrokeWidth="1.0" prefWidth="50.0">
+                              <MFXTextField fx:id="txtPurity" lineStrokeWidth="1.0" prefWidth="50.0">
                                  <HBox.margin>
                                     <Insets right="10.0" />
                                  </HBox.margin>
                               </MFXTextField>
-                              <MFXTextField lineStrokeWidth="1.0" prefWidth="50.0">
+                              <MFXTextField fx:id="txtMetalWeight" lineStrokeWidth="1.0" prefWidth="50.0">
                                  <HBox.margin>
                                     <Insets right="10.0" />
                                  </HBox.margin>
                               </MFXTextField>
-                              <MFXTextField lineStrokeWidth="1.0" prefWidth="50.0">
+                              <MFXTextField fx:id="txtOtherWeight" lineStrokeWidth="1.0" prefWidth="50.0">
                                  <HBox.margin>
                                     <Insets right="10.0" />
                                  </HBox.margin>
                               </MFXTextField>
-                              <MFXTextField layoutX="400.0" layoutY="10.0" lineStrokeWidth="1.0" prefWidth="50.0" />
+                              <MFXTextField fx:id="txtTotalWeight" layoutX="400.0" layoutY="10.0" lineStrokeWidth="1.0" prefWidth="50.0" />
                            </children>
                         </HBox>
                         <HBox layoutX="10.0" layoutY="229.0">
@@ -175,12 +165,12 @@
                         </HBox>
                         <HBox layoutX="10.0" layoutY="246.0">
                            <children>
-                              <MFXTextField lineStrokeWidth="1.0" prefColumnCount="10" prefHeight="23.0" prefWidth="50.0">
+                              <MFXTextField fx:id="txtLabourCharges" lineStrokeWidth="1.0" prefColumnCount="10" prefHeight="23.0" prefWidth="50.0">
                                  <font>
                                     <Font name="FontAwesome Regular" size="14.0" />
                                  </font>
                               </MFXTextField>
-                              <MFXTextField lineStrokeWidth="1.0" prefHeight="23.0" prefWidth="64.0">
+                              <MFXTextField fx:id="txtOtherCharges" lineStrokeWidth="1.0" prefHeight="23.0" prefWidth="64.0">
                                  <font>
                                     <Font name="FontAwesome Regular" size="14.0" />
                                  </font>
@@ -188,7 +178,7 @@
                                     <Insets left="10.0" />
                                  </HBox.margin>
                               </MFXTextField>
-                              <MFXTextField lineStrokeWidth="1.0" prefHeight="23.0" prefWidth="64.0">
+                              <MFXTextField fx:id="txtTotalCharges" lineStrokeWidth="1.0" prefHeight="23.0" prefWidth="64.0">
                                  <font>
                                     <Font name="FontAwesome Regular" size="14.0" />
                                  </font>
@@ -219,12 +209,12 @@
                         </HBox>
                         <HBox layoutX="10.0" layoutY="300.0">
                            <children>
-                              <MFXTextField lineStrokeWidth="1.0" prefColumnCount="10" prefHeight="23.0" prefWidth="50.0">
+                              <MFXTextField fx:id="txtRate" lineStrokeWidth="1.0" prefColumnCount="10" prefHeight="23.0" prefWidth="50.0">
                                  <font>
                                     <Font name="FontAwesome Regular" size="14.0" />
                                  </font>
                               </MFXTextField>
-                              <MFXTextField lineStrokeWidth="1.0" prefHeight="23.0" prefWidth="64.0">
+                              <MFXTextField fx:id="txtQty" lineStrokeWidth="1.0" prefHeight="23.0" prefWidth="64.0">
                                  <font>
                                     <Font name="FontAwesome Regular" size="14.0" />
                                  </font>
@@ -232,7 +222,7 @@
                                     <Insets left="10.0" />
                                  </HBox.margin>
                               </MFXTextField>
-                              <MFXTextField lineStrokeWidth="1.0" prefHeight="23.0" prefWidth="64.0">
+                              <MFXTextField fx:id="txtAmount" lineStrokeWidth="1.0" prefHeight="23.0" prefWidth="64.0">
                                  <font>
                                     <Font name="FontAwesome Regular" size="14.0" />
                                  </font>
@@ -242,45 +232,62 @@
                               </MFXTextField>
                            </children>
                         </HBox>
-                        <JFXButton buttonType="RAISED" layoutX="406.0" layoutY="297.0" prefHeight="30.0" text="ADD">
-                           <font>
-                              <Font name="Georgia Bold" size="14.0" />
-                           </font>
-                           <graphic>
-                              <FontAwesomeIcon fill="WHITE" glyphName="DOWNLOAD" size="20" />
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton buttonType="RAISED" layoutX="494.0" layoutY="297.0" prefHeight="30.0" text="CLEAR">
-                           <font>
-                              <Font name="Georgia Bold" size="14.0" />
-                           </font>
-                           <graphic>
-                              <FontAwesomeIcon fill="WHITE" glyphName="UNDO" size="20" />
-                           </graphic>
-                        </JFXButton>
+                        <HBox layoutX="10.0" layoutY="340.0">
+                           <children>
+                              <JFXButton fx:id="btnAdd" buttonType="RAISED" onAction="#btnAddAction" prefHeight="30.0" text="ADD">
+                                 <font>
+                                    <Font name="Georgia Bold" size="14.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="DOWNLOAD" size="20" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton buttonType="RAISED" onAction="#btnRemoveAction" prefHeight="30.0" text="REMOVE">
+                                 <font>
+                                    <Font name="Georgia Bold" size="14.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="TRASH" size="20" />
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                              <JFXButton fx:id="btnClear" buttonType="RAISED" onAction="#btnClearAction" prefHeight="30.0" text="CLEAR">
+                                 <font>
+                                    <Font name="Georgia Bold" size="14.0" />
+                                 </font>
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="UNDO" size="20" />
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                           </children>
+                        </HBox>
                      </children>
                   </Pane>
-                  <TableView layoutX="22.0" layoutY="392.0" prefHeight="166.0" prefWidth="720.0" stylesheets="@../css/tableview.css" tableMenuButtonVisible="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <TableView fx:id="table" layoutX="22.0" layoutY="377.0" prefHeight="181.0" prefWidth="678.0" stylesheets="@../css/tableview.css" tableMenuButtonVisible="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="46.0" resizable="false" text="Sr.No" />
-                      <TableColumn prefWidth="152.0" text="Item Name" />
-                        <TableColumn prefWidth="52.0" text="Metal" />
-                        <TableColumn prefWidth="57.0" text="Purity" />
-                        <TableColumn prefWidth="72.0" text="Weight" />
-                        <TableColumn prefWidth="37.0" text="Qty" />
-                        <TableColumn prefWidth="67.0" text="Charges" />
-                        <TableColumn prefWidth="89.0" text="Rate" />
-                        <TableColumn prefWidth="71.0" text="Amount" />
-                        <TableColumn prefWidth="52.0" text="Action" />
+                      <TableColumn fx:id="colSrno" prefWidth="56.0" resizable="false" text="Sr.No" />
+                      <TableColumn fx:id="colName" prefWidth="148.0" text="Item Name" />
+                        <TableColumn fx:id="colMetal" prefWidth="46.0" text="Metal" />
+                        <TableColumn fx:id="colPurity" prefWidth="57.0" text="Purity" />
+                        <TableColumn fx:id="colWeight" prefWidth="72.0" text="Weight" />
+                        <TableColumn fx:id="colQty" prefWidth="53.0" text="Qty" />
+                        <TableColumn fx:id="colLabour" prefWidth="74.0" text="Charges" />
+                        <TableColumn fx:id="colRate" prefWidth="91.0" text="Rate" />
+                        <TableColumn fx:id="colAmount" prefWidth="70.0" text="Amount" />
                     </columns>
                   </TableView>
                   <HBox layoutX="10.0" layoutY="575.0">
                      <children>
-                        <MFXTextField lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="72.0" HBox.hgrow="ALWAYS">
+                        <MFXTextField fx:id="txtSGST" lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="72.0" HBox.hgrow="ALWAYS">
                            <font>
                               <Font name="FontAwesome Regular" size="14.0" />
                            </font></MFXTextField>
-                        <MFXTextField lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="72.0">
+                        <MFXTextField fx:id="txtCGST" lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="72.0">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
@@ -288,7 +295,7 @@
                               <Font name="FontAwesome Regular" size="14.0" />
                            </font>
                         </MFXTextField>
-                        <MFXTextField lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="72.0">
+                        <MFXTextField fx:id="txtDiscount" lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="72.0">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
@@ -296,7 +303,7 @@
                               <Font name="FontAwesome Regular" size="14.0" />
                            </font>
                         </MFXTextField>
-                        <MFXTextField editable="false" lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="72.0" text="0">
+                        <MFXTextField fx:id="txtNetTotal" editable="false" lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="72.0" text="0">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
@@ -304,7 +311,7 @@
                               <Font name="FontAwesome Regular" size="14.0" />
                            </font>
                         </MFXTextField>
-                        <MFXTextField lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="72.0" text="0">
+                        <MFXTextField fx:id="txtGrandTotal" lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="72.0" text="0">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
@@ -346,9 +353,9 @@
                               <Insets top="5.0" />
                            </padding>
                         </Label>
-                        <MFXComboBox prefHeight="27.0" prefWidth="244.0" promptText="Select Bank Name">
+                        <MFXComboBox fx:id="cmbBank" comboStyle="STYLE2" prefHeight="27.0" prefWidth="227.0" promptText="Select Bank Name">
                            <HBox.margin>
-                              <Insets left="10.0" />
+                              <Insets left="5.0" />
                            </HBox.margin>
                         </MFXComboBox>
                         <Label text="Recived Amount">
@@ -356,15 +363,15 @@
                               <Insets top="5.0" />
                            </padding>
                            <HBox.margin>
-                              <Insets left="10.0" />
+                              <Insets left="5.0" />
                            </HBox.margin>
                         </Label>
-                        <MFXTextField lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="91.0" text="0">
+                        <MFXTextField fx:id="txtRecivedAmount" lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="91.0" text="0">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                         </MFXTextField>
-                        <MFXTextField editable="false" lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="91.0" text="0">
+                        <MFXTextField fx:id="txtRemainingAmount" editable="false" lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="91.0" text="0">
                            <font>
                               <Font name="FontAwesome Regular" size="14.0" />
                            </font>
@@ -374,17 +381,77 @@
                         </MFXTextField>
                      </children>
                   </HBox>
-                  <JFXButton buttonType="RAISED" layoutX="31.0" layoutY="655.0" prefHeight="30.0" text="SAVE">
-                     <font>
-                        <Font name="Georgia Bold" size="14.0" />
-                     </font>
-                     <graphic>
-                        <FontAwesomeIcon fill="WHITE" glyphName="UNDO" size="20" />
-                     </graphic>
-                  </JFXButton>
+                  <HBox layoutX="10.0" layoutY="641.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+                     <children>
+                        <JFXButton fx:id="btnSave" buttonType="RAISED" onAction="#btnSaveAction" prefHeight="30.0" text="SAVE">
+                           <font>
+                              <Font name="Georgia Bold" size="14.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="SAVE" size="20" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" onAction="#btnUpdateBill" prefHeight="30.0" text="UPDATE">
+                           <font>
+                              <Font name="Georgia Bold" size="14.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="EDIT" size="20" />
+                           </graphic>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" prefHeight="30.0" text="PRINT">
+                           <font>
+                              <Font name="Georgia Bold" size="14.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="PRINT" size="20" />
+                           </graphic>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="btnClearBill" buttonType="RAISED" onAction="#btnClearBillAction" prefHeight="30.0" text="CLEAR">
+                           <font>
+                              <Font name="Georgia Bold" size="14.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="ERASER" size="20" />
+                           </graphic>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" prefHeight="30.0" text="HOME">
+                           <font>
+                              <Font name="Georgia Bold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="HOME" size="20" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </HBox>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="665.0" prefWidth="608.0" SplitPane.resizableWithParent="false" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="665.0" prefWidth="608.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <TableView fx:id="tblOld" layoutX="126.0" layoutY="87.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/tableview.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="colBillno" prefWidth="50.0" text="BillNo" />
+                      <TableColumn fx:id="colDate" prefWidth="90.0" text="Date" />
+                        <TableColumn fx:id="colCustomerName" prefWidth="200.0" text="Customer Name" />
+                        <TableColumn fx:id="colBillAmount" text="Amount" />
+                        <TableColumn fx:id="colPaid" text="Paid" />
+                        <TableColumn fx:id="colRemaining" prefWidth="82.0" text="Remaining" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
         </items>
       </SplitPane>
    </children>

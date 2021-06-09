@@ -19,6 +19,7 @@ public class TransactionController implements Initializable {
 
     private Pane pane;
     private AnchorPane home;
+    private BorderPane root;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -26,11 +27,17 @@ public class TransactionController implements Initializable {
     }
     @FXML
     void btnBillingAction(ActionEvent event) {
-        pane = new ViewUtil().getPage("transaction/billing");
-        home = (AnchorPane) mainPane.getParent();
-        home.getChildren().remove(2);
-        home.getChildren().add(2,pane);
+        pane = new ViewUtil().getPage("transaction/billingframe");
+        root = (BorderPane) mainPane.getParent();
+        root.setCenter(null);
         pane.setLayoutY(40);
+        pane.setLayoutX(0);
+        root.setLeft(pane);
+//
+//        home = (AnchorPane) mainPane.getParent();
+//        home.getChildren().remove(2);
+//        home.getChildren().add(2,pane);
+//        pane.setLayoutY(40);
     }
 
     @FXML

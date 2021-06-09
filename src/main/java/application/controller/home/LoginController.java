@@ -129,7 +129,7 @@ public class LoginController implements Initializable {
 				}
 				new AlertNotification().showSuccessMessage("Login Success");
 				CommonData.login = login;
-				new ViewUtil().changeWindow(event, "home/dashboardframe");
+				new ViewUtil().changeWindow(event, "home/homepage");
 			} catch (Exception e) {
 				e.printStackTrace();
 				new Alert(AlertType.ERROR,"Error "+e.getMessage()).showAndWait();				

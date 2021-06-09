@@ -1,17 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.home.HomePageController">
+<AnchorPane fx:id="root" prefHeight="407.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.home.HomePageController">
    <children>
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="190.0" layoutX="42.0" layoutY="39.0" prefHeight="361.0" prefWidth="190.0" resizeContent="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="39.0" />
-      <Pane layoutX="226.0" layoutY="20.0" prefHeight="40.0" prefWidth="600.0" style="-fx-background-color: #3f51b5;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <StackPane layoutX="48.0" layoutY="81.0" prefHeight="41.0" prefWidth="552.0" style="-fx-background-color: #3f51b5;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXHamburger fx:id="hamburger" layoutX="6.0" layoutY="9.0" />
+            <FontAwesomeIcon fill="#76ff03" glyphName="USER" size="30" text="" StackPane.alignment="CENTER_RIGHT">
+               <StackPane.margin>
+                  <Insets right="150.0" />
+               </StackPane.margin>
+            </FontAwesomeIcon>
+            <Text fill="#76ff03" strokeType="OUTSIDE" strokeWidth="0.0" text="Login User " wrappingWidth="95.337890625" StackPane.alignment="CENTER_RIGHT">
+               <font>
+                  <Font name="Arial Bold Italic" size="16.0" />
+               </font>
+               <StackPane.margin>
+                  <Insets right="50.0" />
+               </StackPane.margin>
+            </Text>
+            <JFXButton alignment="CENTER_RIGHT" buttonType="RAISED" style="-fx-background-color: transparent;" text=" " StackPane.alignment="CENTER_RIGHT">
+               <graphic>
+                  <FontAwesomeIcon fill="#76ff03" glyphName="SIGN_IN" size="30" />
+               </graphic>
+               <padding>
+                  <Insets left="1.0" right="1.0" top="1.0" />
+               </padding>
+               <StackPane.margin>
+                  <Insets right="15200.0" />
+               </StackPane.margin>
+            </JFXButton>
          </children>
-      </Pane>
+      </StackPane>
+      <JFXHamburger fx:id="hamburger" alignment="CENTER_RIGHT" fillWidth="false" prefHeight="40.0" />
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="190.0" layoutX="21.0" layoutY="74.0" prefHeight="333.0" prefWidth="190.0" resizeContent="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0" />
    </children>
 </AnchorPane>
