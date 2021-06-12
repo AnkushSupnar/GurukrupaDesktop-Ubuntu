@@ -12,7 +12,7 @@ public class CustomerDaoImpl implements CustomerDao {
     public List<Customer> getAllCustomer() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            String hql = "from customer";
+            String hql = "from Customer";
             return session.createQuery(hql, Customer.class).list();
         } catch (Exception e) {
             e.printStackTrace();

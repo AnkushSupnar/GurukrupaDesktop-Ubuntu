@@ -3,8 +3,9 @@ package application.controller.report;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
-import entity.entities.Item;
+import hibernate.entities.Item;
+import hibernate.service.service.ItemService;
+import hibernate.service.serviceimpl.ItemServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import service.ItemService;
 
 public class ViewAllItemsController implements Initializable {
 	    @FXML private TableView<Item> table;
@@ -31,7 +31,7 @@ public class ViewAllItemsController implements Initializable {
 	    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		itemService = new ItemService();
+		itemService = new ItemServiceImpl();
 		
 		list.addAll(itemService.getAllItems());
 		

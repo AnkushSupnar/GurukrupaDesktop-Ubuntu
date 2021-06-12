@@ -12,7 +12,7 @@ public class LoginDaoImpl implements LoginDao {
     public List<Login> getAllLogin() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            String hql = "from login";
+            String hql = "from Login";
             return session.createQuery(hql, Login.class).list();
         } catch (Exception e) {
             e.printStackTrace();
@@ -24,7 +24,7 @@ public class LoginDaoImpl implements LoginDao {
     public Login getLoginByName(String name) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            String hql = "from login where username=:uname";
+            String hql = "from Login where username=:uname";
             return session.createQuery(hql, Login.class).setParameter("uname", name).getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,7 +36,7 @@ public class LoginDaoImpl implements LoginDao {
     public Login getLoginByPerson(String person) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            String hql = "from login where person=:person";
+            String hql = "from Login where person=:person";
             return session.createQuery(hql, Login.class).setParameter("person", person).getSingleResult();
 
         } catch (Exception e) {
@@ -100,7 +100,7 @@ public class LoginDaoImpl implements LoginDao {
     public List<String> getAllUserNames() {
         try(Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            String hql = "username from login";
+            String hql = "select userName from Login";
             return session.createQuery(hql,String.class).list();
         }
     }

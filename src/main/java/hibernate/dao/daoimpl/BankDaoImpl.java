@@ -24,7 +24,7 @@ public class BankDaoImpl implements BankDao {
     public List<Bank> getAllBanks() {
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             session.beginTransaction();
-            String hql="from bank";
+            String hql="from Bank";
         List<Bank>list = session.createQuery(hql,Bank.class).list();
         return list;
         }catch(Exception e)
@@ -37,7 +37,7 @@ public class BankDaoImpl implements BankDao {
     public Bank getBankByBankName(String bankname) {
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             session.beginTransaction();
-            String hql = "from bank where bankname=:name";
+            String hql = "from Bank where bankname=:name";
             Bank bank = session.createQuery(hql,Bank.class).setParameter("name",bankname).getSingleResult();
             return bank;
         }catch(Exception e)
@@ -50,7 +50,7 @@ public class BankDaoImpl implements BankDao {
     public List<String> getAllBankNames() {
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             session.beginTransaction();
-            String hql = "bankname from bank";
+            String hql = "select bankname from Bank";
             List<String>list = session.createQuery(hql,String.class).list();
             return list;
         }catch(Exception e)
@@ -63,7 +63,7 @@ public class BankDaoImpl implements BankDao {
     public double getBankBalance(int id) {
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             session.beginTransaction();
-            String hql = "select balance from bank where id=:id";
+            String hql = "select balance from Bank where id=:id";
             return session.createQuery(hql,Double.class).setParameter("id",id).uniqueResult();
         }catch(Exception e)
         {

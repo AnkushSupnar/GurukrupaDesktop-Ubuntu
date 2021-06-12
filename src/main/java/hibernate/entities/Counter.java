@@ -1,20 +1,17 @@
 package hibernate.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name="counter")
 public class Counter {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 	@Column(name="countername")
-	String counterName;
-	String shopNo;
+	String countername;
+	String shopno;
 	String road;	
 	String city;
 	String taluka;
@@ -27,8 +24,8 @@ public class Counter {
 		super();
 	}
 	
-	public Counter(String counterName,
-			String shopNo, 
+	public Counter(String countername,
+			String shopno,
 			String road,
 			String city, 
 			String taluka,
@@ -38,8 +35,8 @@ public class Counter {
 			String contact,
 			char billinitial) {
 		super();
-		this.counterName = counterName;
-		this.shopNo = shopNo;
+		this.countername = countername;
+		this.shopno = shopno;
 		this.road = road;		
 		this.city = city;
 		this.taluka = taluka;
@@ -56,11 +53,11 @@ public class Counter {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getShopNo() {
-		return shopNo;
+	public String getShopno() {
+		return shopno;
 	}
-	public void setShopNo(String shopNo) {
-		this.shopNo = shopNo;
+	public void setShopno(String shopno) {
+		this.shopno = shopno;
 	}
 	public String getRoad() {
 		return road;
@@ -110,17 +107,17 @@ public class Counter {
 	public void setBillinitial(char billinitial) {
 		this.billinitial = billinitial;
 	}
-	public String getCounterName() {
-		return counterName;
+	public String getCountername() {
+		return countername;
 	}
 
-	public void setCounterName(String counterName) {
-		this.counterName = counterName;
+	public void setCountername(String countername) {
+		this.countername = countername;
 	}
 
 	@Override
 	public String toString() {
-		return "Counter [id=" + id + ", counterName=" + counterName + ", shopNo=" + shopNo + ", road=" + road
+		return "Counter [id=" + id + ", counterName=" + countername + ", shopNo=" + shopno + ", road=" + road
 				+ ", city=" + city + ", taluka=" + taluka + ", district=" + district + ", pin="
 				+ pin + ", person=" + person + ", contact=" + contact + ", billinitial=" + billinitial + "]";
 	}

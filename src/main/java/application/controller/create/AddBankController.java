@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application.guiUtil.AlertNotification;
-import entity.entities.Bank;
+import hibernate.entities.Bank;
+import hibernate.service.service.BankService;
+import hibernate.service.serviceimpl.BankServiceImpl;
 import javafx.fxml.FXML;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
@@ -19,7 +21,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import service.BankService;
+
 import javafx.fxml.Initializable;
 
 public class AddBankController implements Initializable {
@@ -50,7 +52,7 @@ public class AddBankController implements Initializable {
 	    private int id;
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
-			bankService = new BankService();
+			bankService = new BankServiceImpl();
 			id=0;
 			message = new AlertNotification();
 			bankList.addAll(bankService.getAllBanks());
@@ -121,19 +123,19 @@ public class AddBankController implements Initializable {
 				bank.setId(id);
 				System.out.println(bank);
 				if (id == 0) {
-					Bank b = bankService.saveBank(bank);
-					if (b != null) {
+					int b = bankService.saveBank(bank);
+					if (b != 0) {
 						message.showSuccessMessage("Bank Save Success");
-						addInBankList(b);
+						addInBankList(bank);
 						clear();
 					} else 
 						message.showErrorMessage("Error in Saving Bank");
 				}
 				else {
-					Bank b= bankService.updateBank(bank);
-					if (b != null) {
+					int b= bankService.updateBank(bank);
+					if (b != 0) {
 						message.showSuccessMessage("Bank Update Success");
-						addInBankList(b);
+						addInBankList(bank);
 						clear();
 					} else 
 						message.showErrorMessage("Error in Updating Bank");

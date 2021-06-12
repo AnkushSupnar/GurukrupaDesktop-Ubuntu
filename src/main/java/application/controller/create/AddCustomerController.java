@@ -4,7 +4,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.guiUtil.AlertNotification;
-import entity.entities.Customer;
+import hibernate.entities.Customer;
+import hibernate.service.service.CustomerService;
+import hibernate.service.serviceimpl.CustomerServiceImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,7 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import service.CustomerService;
+
 
 public class AddCustomerController implements Initializable {
 
@@ -44,7 +46,7 @@ public class AddCustomerController implements Initializable {
 	    private ObservableList<Customer>customerList=FXCollections.observableArrayList();
 	    @Override
 		public void initialize(URL location, ResourceBundle resources) {
-	    	customerService = new CustomerService();
+	    	customerService = new CustomerServiceImpl();
 	    	
 	    	colSrNo.setCellValueFactory(new PropertyValueFactory<>("id"));
 	    	colCode.setCellValueFactory(new PropertyValueFactory<>("code"));    
@@ -88,7 +90,7 @@ public class AddCustomerController implements Initializable {
 	    	{
 	    		return;
 	    	}
-	    	cust = customerService.getCuatomerById(cust.getId());
+	    	cust = customerService.getCustomerById(cust.getId());
 	    	if(cust==null)
 	    	{
 	    		new AlertNotification().showErrorMessage("No Customer Found");
@@ -126,7 +128,7 @@ public class AddCustomerController implements Initializable {
 	    		return;
 	    	}
 	    	
-	    		if(id==0 && customerService.getCuatomerByCode(txtCode.getText())!=null)
+	    		if(id==0 && customerService.findByCode(txtCode.getText())!=null)
 	    		{
 	    			new AlertNotification().showErrorMessage("Customer Code Not Available please Choose Another");
 	    			return;
@@ -146,8 +148,8 @@ public class AddCustomerController implements Initializable {
 	    	customer.setId(id);
 	    	if(id==0)
 	    	{
-	    		Customer c = customerService.saveCustomer(customer);
-	    		if(c!=null)
+	    		int c = customerService.saveCustomer(customer);
+	    		if(c!=0)
 	    		{
 	    			new AlertNotification().showSuccessMessage("Customer Save Success");
 	    			addInCustomerList(customer);
@@ -160,8 +162,8 @@ public class AddCustomerController implements Initializable {
 	    	}
 	    	else
 	    	{
-	    		Customer c = customerService.updateCustomer(customer);
-	    		if(c!=null)
+	    		int c = customerService.updateCustomer(customer);
+	    		if(c!=0)
 	    		{
 	    			new AlertNotification().showSuccessMessage("Customer Update Success");
 	    			addInCustomerList(customer);

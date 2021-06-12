@@ -15,7 +15,7 @@ public class BillDaoImpl implements BillDao {
     public List<Bill> getAllBills() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            String hql = "from bill";
+            String hql = "from Bill";
             return session.createQuery(hql, Bill.class).list();
         } catch (Exception e) {
             e.printStackTrace();
@@ -40,7 +40,7 @@ public class BillDaoImpl implements BillDao {
     public List<Bill> getBillByDate(LocalDate date) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            String hql = "from bill where date=:date";
+            String hql = "from Bill where date=:date";
             return session.createQuery(hql, Bill.class).setParameter("date", date).list();
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,7 +53,7 @@ public class BillDaoImpl implements BillDao {
     public List<Bill> getBillByCustomer(long customerid) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            String hql = "from bill where customerid=:cid";
+            String hql = "from Bill where customerid=:cid";
             return session.createQuery(hql, Bill.class).setParameter("cid", customerid).list();
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,7 +66,7 @@ public class BillDaoImpl implements BillDao {
     public List<Bill> getBillByLogin(int loginid) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            String hql = "from bill where loginid=:lid";
+            String hql = "from Bill where loginid=:lid";
             return session.createQuery(hql, Bill.class).setParameter("lid", loginid).list();
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,10 +95,12 @@ public class BillDaoImpl implements BillDao {
             session.beginTransaction();
             if (bill.getBillno() == 0) {
                 session.save(bill);
+                session.getTransaction().commit();
                 return 1;
             } else {
                 if (deleteTransactionByBillno(bill.getBillno()) == 1) {
                     session.update(bill);
+                    session.getTransaction().commit();
                     return 2;
                 } else
                     return 0;

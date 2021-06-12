@@ -4,7 +4,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.guiUtil.AlertNotification;
-import entity.entities.Counter;
+import hibernate.entities.Counter;
+import hibernate.service.service.CounterService;
+import hibernate.service.serviceimpl.CounterServiceImpl;
 import javafx.fxml.Initializable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import service.CounterService;
+
 public class CreateCounterController implements Initializable {
 	   	@FXML private TextField txtName;
 	    @FXML private TextField txtShopNo;
@@ -37,13 +39,13 @@ public class CreateCounterController implements Initializable {
 	    
 	    
 	    
-	    private CounterService counterService; 
+	    private CounterService counterService;
 	    private ObservableList<Counter> allCounters = FXCollections.observableArrayList();
 	    private int id; 
 	    @Override
 		public void initialize(URL location, ResourceBundle resources) {
 			id=0;
-			counterService = new CounterService();
+			counterService = new CounterServiceImpl();
 			allCounters.addAll(counterService.getAllCounters());
 			txtBillNoInitial.setText(""+((char)(allCounters.size()+65)));
 			
@@ -90,8 +92,8 @@ public class CreateCounterController implements Initializable {
 	    			txtContact.getText(), 
 	    			txtBillNoInitial.getText().charAt(0));
 	    	counter.setId(id);
-	    	service.CounterService ser = new service.CounterService();
-	    	int flag = ser.saveCounter(counter);
+
+	    	int flag = counterService.saveCounter(counter);
 	    	if(flag==1)
 	    	{
 	    		new AlertNotification().showSuccessMessage("Counter Save Success!!!");
@@ -118,11 +120,11 @@ public class CreateCounterController implements Initializable {
 	    	txtCity.setText(c.getCity());
 	    	txtContact.setText(c.getContact());
 	    	txtDistrict.setText(c.getDistrict());
-	    	txtName.setText(c.getCounterName());
+	    	txtName.setText(c.getCountername());
 	    	txtPerson.setText(c.getPerson());
 	    	txtPin.setText(""+c.getPin());
 	    	txtRoad.setText(c.getRoad());
-	    	txtShopNo.setText(c.getShopNo());
+	    	txtShopNo.setText(c.getShopno());
 	    	txtTaluka.setText(c.getTaluka());
 	    	id = c.getId();
 	    }
@@ -144,7 +146,7 @@ public class CreateCounterController implements Initializable {
 				}
 				for(Counter c:allCounters)
 				{
-					if(c.getCounterName().equals(txtName.getText())&& id==0)
+					if(c.getCountername().equals(txtName.getText())&& id==0)
 					{
 						new AlertNotification().showErrorMessage("Counter Name Already Exist!!!");
 						txtName.requestFocus();
@@ -226,7 +228,7 @@ public class CreateCounterController implements Initializable {
 	    }
 	    private String getAddress(Counter counter)
 	    {
-	    	return "ShopNo:"+counter.getShopNo()+",Road:"+counter.getRoad()
+	    	return "ShopNo:"+counter.getShopno()+",Road:"+counter.getRoad()
 	    	+",City:"+counter.getCity()+".Taluka:"+counter.getTaluka()
 	    	+"District:"+counter.getDistrict()+",Pin:"+counter.getPin();
 	    }

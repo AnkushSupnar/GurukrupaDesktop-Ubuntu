@@ -7,13 +7,18 @@ import java.util.List;
 import java.util.ResourceBundle;
 import application.Main;
 import application.guiUtil.AlertNotification;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import entity.entities.Bill;
-import entity.entities.Customer;
-import entity.entities.Item;
-import entity.entities.Transaction;
+
 import entity.reportEntities.OldBill;
 import entity.reportEntities.TransactionReport;
+import hibernate.entities.Bill;
+import hibernate.entities.Customer;
+import hibernate.entities.Item;
+import hibernate.entities.Transaction;
+import hibernate.service.service.BankService;
+import hibernate.service.service.BillService;
+import hibernate.service.service.CustomerService;
+import hibernate.service.service.ItemService;
+import hibernate.service.serviceimpl.*;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import impl.org.controlsfx.autocompletion.SuggestionProvider;
 import javafx.beans.value.ChangeListener;
@@ -33,7 +38,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import service.*;
+
 import io.github.palexdev.materialfx.controls.MFXTextField;
 
 public class BillingController implements Initializable {
@@ -41,33 +46,33 @@ public class BillingController implements Initializable {
 	 @FXML private DatePicker date;
 	 @FXML private TextField txtCustomerName;
 	 @FXML private TextArea txtCustomerInfo;
-	 	@FXML private TextField txtItemName;
-	 	@FXML private TextField txtMetal;
-	    @FXML private TextField txtPurity;
-	    @FXML private TextField txtMetalWeight;
-	    @FXML private TextField txtOtherWeight;
-	    @FXML private TextField txtTotalWeight;
-	    @FXML private TextField txtLabourCharges;
-	    @FXML private TextField txtOtherCharges;
-	    @FXML private TextField txtRate;
- 	    @FXML private TextField txtQty;
-	    @FXML private TextField txtAmount;
-	    @FXML private TextField txtTotalCharges;
-	    @FXML private Button btnAdd;
-	    @FXML private Button btnSearch;
-	    @FXML private Button btnClearBill;
+	 @FXML private TextField txtItemName;
+	 @FXML private TextField txtMetal;
+	 @FXML private TextField txtPurity;
+	 @FXML private TextField txtMetalWeight;
+	 @FXML private TextField txtOtherWeight;
+	 @FXML private TextField txtTotalWeight;
+	 @FXML private TextField txtLabourCharges;
+	 @FXML private TextField txtOtherCharges;
+	 @FXML private TextField txtRate;
+	 @FXML private TextField txtQty;
+	 @FXML private TextField txtAmount;
+	 @FXML private TextField txtTotalCharges;
+	 @FXML private Button btnAdd;
+	 @FXML private Button btnSearch;
+	 @FXML private Button btnClearBill;
 
 	    
-	    @FXML private TableView<TransactionReport> table;
-	    @FXML private TableColumn<TransactionReport,Integer>colSrno;
-	    @FXML private TableColumn<TransactionReport,String> colName;
-	    @FXML private TableColumn<TransactionReport,String> colMetal;
-	    @FXML private TableColumn<TransactionReport,Double> colPurity;
-	    @FXML private TableColumn<TransactionReport,Double> colWeight;
-	    @FXML private TableColumn<TransactionReport,Double> colQty;
-	    @FXML private TableColumn<TransactionReport,Double> colLabour;
-	    @FXML private TableColumn<TransactionReport,Double> colRate;
-	    @FXML private TableColumn<TransactionReport,Double> colAmount;
+	 @FXML private TableView<TransactionReport> table;
+	 @FXML private TableColumn<TransactionReport,Integer>colSrno;
+	 @FXML private TableColumn<TransactionReport,String> colName;
+	 @FXML private TableColumn<TransactionReport,String> colMetal;
+	 @FXML private TableColumn<TransactionReport,Double> colPurity;
+	 @FXML private TableColumn<TransactionReport,Double> colWeight;
+	 @FXML private TableColumn<TransactionReport,Double> colQty;
+	 @FXML private TableColumn<TransactionReport,Double> colLabour;
+	 @FXML private TableColumn<TransactionReport,Double> colRate;
+	 @FXML private TableColumn<TransactionReport,Double> colAmount;
 
 	@FXML private TextField txtSGST;
 	@FXML private TextField txtDiscount;
@@ -102,10 +107,10 @@ public class BillingController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		trid = 1;
 		billno=0;
-		customerService = new CustomerService();
-		itemService = new ItemService();
-		bankService = new BankService();
-		billService = new BillService();
+		customerService = new CustomerServiceImpl();
+		itemService = new ItemServiceImpl();
+		bankService = new BankServiceImpl();
+		billService = new BillServiceImpl();
 		message = new AlertNotification();
 		date.setValue(LocalDate.now());
 		customerNames.addAll(customerService.getAllCustomerNames());
@@ -254,7 +259,7 @@ public class BillingController implements Initializable {
 					txtItemName.requestFocus();
 					return;
 				}
-				Item item = itemService.getItemByName(txtItemName.getText());
+				Item item = itemService.getByName(txtItemName.getText());
 				if(item==null)
 				{
 					message.showErrorMessage("Item Not Found Plese Select Correct Name");
@@ -390,7 +395,7 @@ public class BillingController implements Initializable {
 		bill.setDate(date.getValue());
 		bill.setSgst(Double.parseDouble(txtSGST.getText()));
 		bill.setDiscount(Double.parseDouble(txtDiscount.getText()));
-		bill.setLogin(new LoginService().getLoginById(1));
+		bill.setLogin(new LoginServiceImpl().getLoginById(1));
 		bill.setPaidamount(Double.parseDouble(txtRecivedAmount.getText()));
 
 
@@ -398,34 +403,34 @@ public class BillingController implements Initializable {
 
 		if(billno==0)
 		{
-			Bill savedBill =billService.saveBill(bill);
-			if(savedBill!=null)
+			int savedBill =billService.saveBill(bill);
+			if(savedBill==0)
 			{
-				message.showSuccessMessage("Bill no "+savedBill.getBillno()+" Saved Success");
-				oldBillList.add(savedBill);
+				message.showSuccessMessage("Bill no "+bill.getBillno()+" Saved Success");
+				oldBillList.add(bill);
 				billList.add(
 						new OldBill(
-								savedBill.getBillno(),
-								savedBill.getDate(),
-								savedBill.getCustomer().getFname()+" "+savedBill.getCustomer().getMname()+" "+savedBill.getCustomer().getLname(),
-								savedBill.getAmount(),
-								savedBill.getPaidamount(),
-								savedBill.getAmount()-savedBill.getPaidamount()
+								bill.getBillno(),
+								bill.getDate(),
+								bill.getCustomer().getFname()+" "+bill.getCustomer().getMname()+" "+bill.getCustomer().getLname(),
+								bill.getAmount(),
+								bill.getPaidamount(),
+								bill.getAmount()-bill.getPaidamount()
 								));
             } else {
                 message.showErrorMessage("Error in Saving Bill");
             }
         } else {
-            Bill savedBill =billService.updateBill(bill);
-            if (savedBill != null) {
+            int savedBill =billService.updateBill(bill);
+            if (savedBill ==2) {
                 message.showSuccessMessage("Bill" + bill.getBillno() + " Update Success");
                 OldBill updated = new OldBill(
-                        savedBill.getBillno(),
-                        savedBill.getDate(),
-                        savedBill.getCustomer().getFname()+" "+savedBill.getCustomer().getMname()+" "+savedBill.getCustomer().getLname(),
-                        savedBill.getAmount(),
-						savedBill.getPaidamount(),
-                        savedBill.getAmount()-savedBill.getPaidamount()
+						bill.getBillno(),
+						bill.getDate(),
+                        bill.getCustomer().getFname()+" "+bill.getCustomer().getMname()+" "+bill.getCustomer().getLname(),
+                        bill.getAmount(),
+						bill.getPaidamount(),
+                        bill.getAmount()-bill.getPaidamount()
                 );
                 int index = billList.indexOf(
                 		billList.stream().filter(
@@ -436,11 +441,11 @@ public class BillingController implements Initializable {
                 billList.add(index,updated);
                 index = oldBillList.indexOf(
                 	oldBillList.stream().filter(
-                			b->b.getBillno()==savedBill.getBillno()
+                			b->b.getBillno()==bill.getBillno()
 					).findAny().orElse(null)
 				);
                 oldBillList.remove(index);
-                oldBillList.add(index,savedBill);
+                oldBillList.add(index,bill);
 
             } else {
                 message.showErrorMessage("Error in Updating Bill");
@@ -570,7 +575,7 @@ public class BillingController implements Initializable {
 		for (TransactionReport tr : trList) {
 			transactionList.add(
 					new Transaction(
-							itemService.getItemByName(tr.getName()),
+							itemService.getByName(tr.getName()),
 							tr.getRate(),
 							tr.getQty(),
 							bill

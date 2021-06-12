@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.guiUtil.AlertNotification;
-import entity.entities.Item;
+
+import hibernate.entities.Item;
+import hibernate.service.service.ItemService;
+import hibernate.service.serviceimpl.ItemServiceImpl;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import impl.org.controlsfx.autocompletion.SuggestionProvider;
 import javafx.collections.FXCollections;
@@ -23,7 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import service.ItemService;
+
 public class AddItemController implements Initializable{
 	 	@FXML private AnchorPane mainPane;
 	    @FXML private TextField txtItemName;
@@ -60,7 +63,7 @@ public class AddItemController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		id=0;
-		itemService = new ItemService();
+		itemService = new ItemServiceImpl();
 		itemList.addAll(itemService.getAllItems());
 		metals.add("Gold");
 		metals.add("Silver");
@@ -195,16 +198,16 @@ public class AddItemController implements Initializable{
 			item.setId(id);
 			System.out.println(item);
 			if (item.getId() == 0) {
-				Item i =itemService.saveItem(item) ;
-				if ( i!= null) {
+				int i =itemService.saveItem(item) ;
+				if ( i== 1) {
 					System.out.println("From Ui\n"+i);
 					new AlertNotification().showSuccessMessage("Item Save Success");
-					itemList.add(i);
+					itemList.add(item);
 					btnClear.fire();
 				} else
 					new AlertNotification().showErrorMessage("Error In Saving Item");
 			} else {
-				if (itemService.updateItem(item) != null) {
+				if (itemService.updateItem(item) ==2) {
 					new AlertNotification().showSuccessMessage("Item Update Success");
 					int f = -1;
 					for (int i = 0; i < itemList.size(); i++) {

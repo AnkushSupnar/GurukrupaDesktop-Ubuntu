@@ -15,12 +15,14 @@ import de.jensd.fx.glyphs.GlyphIcon;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
-import entity.entities.Bill;
-import entity.entities.Customer;
-import entity.entities.Item;
-import entity.entities.Transaction;
 import entity.reportEntities.OldBill;
 import entity.reportEntities.TransactionReport;
+import hibernate.entities.Bill;
+import hibernate.entities.Customer;
+import hibernate.entities.Item;
+import hibernate.entities.Transaction;
+import hibernate.service.service.*;
+import hibernate.service.serviceimpl.*;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import impl.org.controlsfx.autocompletion.SuggestionProvider;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
@@ -43,7 +45,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import service.*;
+
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.util.Callback;
 
@@ -117,10 +119,10 @@ public class BillingFrameController implements Initializable {
         date.getDatePicker().setValue(LocalDate.now());
         System.out.println(date.getDate());
         billno=0;
-        customerService = new CustomerService();
-        itemService = new ItemService();
-        bankService = new BankService();
-        billService = new BillService();
+        customerService = new CustomerServiceImpl();
+        itemService = new ItemServiceImpl();
+        bankService = new BankServiceImpl();
+        billService = new BillServiceImpl();
         message = new AlertNotification();
 
 
@@ -232,7 +234,7 @@ public class BillingFrameController implements Initializable {
     @FXML
     void btnNewAction(ActionEvent event) throws IOException {
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(Main.class.getResource("/application/view/create/AddCustomer.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("/view/create/addcustomer.fxml"));
         stage.setScene(new Scene(root));
         stage.setTitle("Add New Customer");
         stage.initModality(Modality.WINDOW_MODAL);
@@ -272,7 +274,7 @@ public class BillingFrameController implements Initializable {
                 txtItemName.requestFocus();
                 return;
             }
-            Item item = itemService.getItemByName(txtItemName.getText());
+            Item item = itemService.getByName(txtItemName.getText());
             if(item==null)
             {
                 message.showErrorMessage("Item Not Found Plese Select Correct Name");
@@ -408,42 +410,41 @@ public class BillingFrameController implements Initializable {
         bill.setDate(date.getDate());
         bill.setSgst(Double.parseDouble(txtSGST.getText()));
         bill.setDiscount(Double.parseDouble(txtDiscount.getText()));
-        bill.setLogin(new LoginService().getLoginById(1));
+        bill.setLogin(new LoginServiceImpl().getLoginById(1));
         bill.setPaidamount(Double.parseDouble(txtRecivedAmount.getText()));
-
-
         bill.setTransaction(transactionReportToTransactionList(bill));
 
         if(billno==0)
         {
-            Bill savedBill =billService.saveBill(bill);
-            if(savedBill!=null)
+            int savedBill =billService.saveBill(bill);
+            if(savedBill==1)
             {
-                message.showSuccessMessage("Bill no "+savedBill.getBillno()+" Saved Success");
-                oldBillList.add(savedBill);
+                message.showSuccessMessage("Bill no "+bill.getBillno()+" Saved Success");
+                oldBillList.add(bill);
                 billList.add(
                         new OldBill(
-                                savedBill.getBillno(),
-                                savedBill.getDate(),
-                                savedBill.getCustomer().getFname()+" "+savedBill.getCustomer().getMname()+" "+savedBill.getCustomer().getLname(),
-                                savedBill.getAmount(),
-                                savedBill.getPaidamount(),
-                                savedBill.getAmount()-savedBill.getPaidamount()
+                                bill.getBillno(),
+                                bill.getDate(),
+                                bill.getCustomer().getFname()+" "+bill.getCustomer().getMname()+" "+bill.getCustomer().getLname(),
+                                bill.getAmount(),
+                                bill.getPaidamount(),
+                                bill.getAmount()-bill.getPaidamount()
                         ));
+                clearBill();
             } else {
                 message.showErrorMessage("Error in Saving Bill");
             }
         } else {
-            Bill savedBill =billService.updateBill(bill);
-            if (savedBill != null) {
+            int savedBill =billService.updateBill(bill);
+            if (savedBill ==2) {
                 message.showSuccessMessage("Bill" + bill.getBillno() + " Update Success");
                 OldBill updated = new OldBill(
-                        savedBill.getBillno(),
-                        savedBill.getDate(),
-                        savedBill.getCustomer().getFname()+" "+savedBill.getCustomer().getMname()+" "+savedBill.getCustomer().getLname(),
-                        savedBill.getAmount(),
-                        savedBill.getPaidamount(),
-                        savedBill.getAmount()-savedBill.getPaidamount()
+                        bill.getBillno(),
+                        bill.getDate(),
+                        bill.getCustomer().getFname()+" "+bill.getCustomer().getMname()+" "+bill.getCustomer().getLname(),
+                        bill.getAmount(),
+                        bill.getPaidamount(),
+                        bill.getAmount()-bill.getPaidamount()
                 );
                 int index = billList.indexOf(
                         billList.stream().filter(
@@ -454,11 +455,12 @@ public class BillingFrameController implements Initializable {
                 billList.add(index,updated);
                 index = oldBillList.indexOf(
                         oldBillList.stream().filter(
-                                b->b.getBillno()==savedBill.getBillno()
+                                b->b.getBillno()==bill.getBillno()
                         ).findAny().orElse(null)
                 );
                 oldBillList.remove(index);
-                oldBillList.add(index,savedBill);
+                oldBillList.add(index,bill);
+                clearBill();
 
             } else {
                 message.showErrorMessage("Error in Updating Bill");
@@ -588,7 +590,7 @@ public class BillingFrameController implements Initializable {
         for (TransactionReport tr : trList) {
             transactionList.add(
                     new Transaction(
-                            itemService.getItemByName(tr.getName()),
+                            itemService.getByName(tr.getName()),
                             tr.getRate(),
                             tr.getQty(),
                             bill

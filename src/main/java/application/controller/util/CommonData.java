@@ -1,7 +1,7 @@
 package application.controller.util;
 
 
-import entity.entities.Login;
+import hibernate.entities.Login;
 
 public class CommonData {
 	public static Login login;

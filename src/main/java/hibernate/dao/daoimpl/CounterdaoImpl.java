@@ -12,7 +12,7 @@ public class CounterdaoImpl implements CounterDao {
     public List<Counter> getAllCounters() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
             session.beginTransaction();
-            String hql="from counter";
+            String hql="from Counter";
             return session.createQuery(hql,Counter.class).list();
         }catch(Exception e)
         {
@@ -35,7 +35,7 @@ public class CounterdaoImpl implements CounterDao {
     public Counter getCounterByName(String name) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
             session.beginTransaction();
-            String hql="from counter where countername=:name";
+            String hql="from Counter where countername=:name";
             return session.createQuery(hql,Counter.class).setParameter("name",name).getSingleResult();
         }catch(Exception e)
         {
@@ -47,7 +47,7 @@ public class CounterdaoImpl implements CounterDao {
     public List<String> getAllCounterNames() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
             session.beginTransaction();
-            String hql="countername from counter";
+            String hql="select countername from Counter";
             return session.createQuery(hql,String.class).list();
         }catch(Exception e)
         {
@@ -88,7 +88,7 @@ public class CounterdaoImpl implements CounterDao {
     public Counter getCounterByPerson(String person) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
             session.beginTransaction();
-            String hql="from counter where person=:person";
+            String hql="from Counter where person=:person";
             return session.createQuery(hql,Counter.class).setParameter("person",person).getSingleResult();
         }catch(Exception e)
         {

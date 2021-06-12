@@ -12,7 +12,7 @@ public class ItemDaoImpl implements ItemDao {
     public List<Item> getAllItems() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
             session.beginTransaction();
-            String hql="from item";
+            String hql="from Item";
             return session.createQuery(hql,Item.class).list();
         }catch (Exception e)
         {
@@ -35,7 +35,7 @@ public class ItemDaoImpl implements ItemDao {
     public Item getByName(String name) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
             session.beginTransaction();
-            String hql="from item where itemname=:name";
+            String hql="from Item where itemname=:name";
             return session.createQuery(hql,Item.class).setParameter("name",name).getSingleResult();
         }catch (Exception e)
         {
@@ -47,7 +47,7 @@ public class ItemDaoImpl implements ItemDao {
     public List<String> getAllItemNames() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()){
             session.beginTransaction();
-            String hql="itemname from item";
+            String hql="select itemname from Item";
             return session.createQuery(hql,String.class).list();
         }catch (Exception e)
         {

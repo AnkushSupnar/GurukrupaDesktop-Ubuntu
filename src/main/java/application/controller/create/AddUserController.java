@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.guiUtil.AlertNotification;
-import entity.entities.Login;
+import hibernate.entities.Login;
+import hibernate.service.service.LoginService;
+import hibernate.service.serviceimpl.LoginServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,7 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import service.LoginService;
+
 
 public class AddUserController implements Initializable {
 
@@ -29,8 +31,8 @@ public class AddUserController implements Initializable {
 	    private List<Login>loginList = new ArrayList<>();
 	    @Override
 		public void initialize(URL location, ResourceBundle resources) {			
-			service = new LoginService();
-			loginList.addAll(service.getAllLogins());
+			service = new LoginServiceImpl();
+			loginList.addAll(service.getAllLogin());
 			
 	    }
 	    
@@ -84,7 +86,7 @@ public class AddUserController implements Initializable {
 	    		login.setPerson(txtPerson.getText());
 	    		login.setPassword(txtPassword.getText());
 	    		login.setUserName(txtUserName.getText());
-	    		if(service.saveLogin(login)!=null)
+	    		if(service.saveLogin(login)==1)
 	    		{
 	    			
 	    			new AlertNotification().showSuccessMessage("Login Saved Success");
@@ -99,7 +101,7 @@ public class AddUserController implements Initializable {
 	    	{
 	    		login.setUserName(txtUserName.getText());
 	    		login.setPassword(txtPassword.getText());
-	    		if(service.saveLogin(login)!=null)
+	    		if(service.saveLogin(login)==2)
 	    		{
 	    			new AlertNotification().showSuccessMessage("Login Update Success");
 	    			btnCancel.fire();

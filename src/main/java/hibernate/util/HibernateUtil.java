@@ -41,6 +41,7 @@ public class HibernateUtil {
 				configuration.addAnnotatedClass(Bank.class);
 				configuration.addAnnotatedClass(Transaction.class);
 				configuration.addAnnotatedClass(Bill.class);
+				configuration.addAnnotatedClass(CustomerPassbook.class);
 				
 
 				ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()

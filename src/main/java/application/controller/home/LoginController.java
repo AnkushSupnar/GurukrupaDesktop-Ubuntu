@@ -7,7 +7,11 @@ import java.util.ResourceBundle;
 import application.controller.util.CommonData;
 import application.controller.util.ViewUtil;
 import application.guiUtil.AlertNotification;
-import entity.entities.Login;
+import hibernate.entities.Login;
+import hibernate.service.service.CounterService;
+import hibernate.service.service.LoginService;
+import hibernate.service.serviceimpl.CounterServiceImpl;
+import hibernate.service.serviceimpl.LoginServiceImpl;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
 import impl.org.controlsfx.autocompletion.SuggestionProvider;
 import javafx.event.ActionEvent;
@@ -20,8 +24,8 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import service.CounterService;
-import service.LoginService;
+//import service.CounterService;
+//import service.LoginService;
 
 public class LoginController implements Initializable {
 	  	@FXML private AnchorPane mainWindow;
@@ -45,16 +49,12 @@ public class LoginController implements Initializable {
 	    @Override
 		public void initialize(URL location, ResourceBundle resources) {
 	    	
-	    	counterService = new CounterService();
-	    	loginService = new LoginService();
+	    	counterService = new CounterServiceImpl();
+	    	loginService = new LoginServiceImpl();
 	    	viewUtil = new ViewUtil();
 	    	userNames.addAll(loginService.getAllUserNames());
 	    	counterNames.addAll(counterService.getAllCounterNames());
-	    	if(!loginService.checkConnrction().equals("Connected"))
-	    	{
-	    		new Alert(AlertType.ERROR,"API Not Connected Pease Check Your Connection").showAndWait();
-	    		return;
-	    	}
+
 	    	
 	    	if(counterNames.size()==0)
 	    	{
