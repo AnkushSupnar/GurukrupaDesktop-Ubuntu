@@ -18,9 +18,9 @@ public interface BillDao {
 
     public List<Bill> getDatePeriodBill(LocalDate start, LocalDate end);
 
-    public int saveBill(Bill bill);
+    public long saveBill(Bill bill);
 
-    public int updateBill(Bill bill);
+    public long updateBill(Bill bill);
 
     public int deleteTransactionByBillno(long billno);
 }

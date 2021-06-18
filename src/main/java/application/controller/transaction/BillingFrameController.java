@@ -416,7 +416,7 @@ public class BillingFrameController implements Initializable {
 
         if(billno==0)
         {
-            int savedBill =billService.saveBill(bill);
+            long savedBill =billService.saveBill(bill);
             if(savedBill==1)
             {
                 message.showSuccessMessage("Bill no "+bill.getBillno()+" Saved Success");
@@ -435,7 +435,7 @@ public class BillingFrameController implements Initializable {
                 message.showErrorMessage("Error in Saving Bill");
             }
         } else {
-            int savedBill =billService.updateBill(bill);
+            long savedBill =billService.updateBill(bill);
             if (savedBill ==2) {
                 message.showSuccessMessage("Bill" + bill.getBillno() + " Update Success");
                 OldBill updated = new OldBill(

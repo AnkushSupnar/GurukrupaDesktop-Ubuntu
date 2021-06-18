@@ -35,6 +35,22 @@ public class CustomerPassbookDaoImpl implements CustomerPassbookDao {
     }
 
     @Override
+    public CustomerPassbook getCustomerPassbookByBillNo(long billno) {
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            session.beginTransaction();
+            String hql = "from CustomerPassbook where trid=:billno and particulars=:parti";
+
+            return session.createQuery(hql,CustomerPassbook.class).
+                    setParameter("trid",billno).
+                    setParameter("particulars","Bill no "+billno).getSingleResult();
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
     public List<CustomerPassbook> getCustomerPassbookbyCustomer(long customerId) {
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             session.beginTransaction();

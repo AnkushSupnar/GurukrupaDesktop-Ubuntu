@@ -10,6 +10,8 @@ public interface CustomerPassbookDao {
 
     CustomerPassbook getCustomerPassbookById(long id);
 
+    CustomerPassbook getCustomerPassbookByBillNo(long billno);
+
     List<CustomerPassbook> getCustomerPassbookbyCustomer(long customerId);
 
     List<CustomerPassbook> getCustomerPassbookbyByDatePeriod(long customerId, LocalDate start, LocalDate end);

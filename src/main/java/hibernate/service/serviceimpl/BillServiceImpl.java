@@ -50,7 +50,7 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public int saveBill(Bill bill) {
+    public long saveBill(Bill bill) {
         //add in customer passbook
         CustomerPassbook book = new CustomerPassbook();
         book.setBank(bill.getBank());
@@ -58,15 +58,33 @@ public class BillServiceImpl implements BillService {
         book.setDate(bill.getDate());
         book.setCredit(bill.getPaidamount());
         book.setDebit(bill.getAmount()-bill.getPaidamount());
-        book.setParticulars("Bill no "+bill.getBillno());
-        book.setTrid(bill.getBillno());
-        bookService.saveCustomerPassbook(book);
-        return dao.saveBill(bill);
+        long billno =dao.saveBill(bill);
+        if(billno!=0)
+        {
+            book.setTrid(billno);
+            book.setParticulars("Bill no "+bill.getBillno());
+            bookService.saveCustomerPassbook(book);
+
+            return 1;
+        }
+        else
+            return 0;
     }
 
     @Override
-    public int updateBill(Bill bill) {
-        return dao.updateBill(bill);
+    public long updateBill(Bill bill) {
+        CustomerPassbook book = bookService.getCustomerPassbookByBillNo(bill.getBillno());
+        book.setBank(bill.getBank());
+        book.setCustomer(bill.getCustomer());
+        book.setDate(bill.getDate());
+        book.setCredit(bill.getPaidamount());
+        book.setDebit(bill.getAmount()-bill.getPaidamount());
+        book.setParticulars("Bill no "+bill.getBillno());
+        book.setTrid(bill.getBillno());
+        long billno =dao.updateBill(bill);
+        book.setTrid(billno);
+        bookService.saveCustomerPassbook(book);
+        return 2;
     }
 
     @Override

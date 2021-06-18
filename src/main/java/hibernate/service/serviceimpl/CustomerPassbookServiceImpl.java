@@ -27,6 +27,11 @@ public class CustomerPassbookServiceImpl implements CustomerPassbookService {
     }
 
     @Override
+    public CustomerPassbook getCustomerPassbookByBillNo(long billno) {
+        return dao.getCustomerPassbookByBillNo(billno);
+    }
+
+    @Override
     public List<CustomerPassbook> getCustomerPassbookbyCustomer(long customerId) {
         return dao.getCustomerPassbookbyCustomer(customerId);
     }
