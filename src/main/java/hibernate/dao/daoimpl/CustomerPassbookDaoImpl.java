@@ -5,6 +5,7 @@ import hibernate.entities.CustomerPassbook;
 import hibernate.util.HibernateUtil;
 import org.hibernate.Session;
 
+import javax.persistence.NoResultException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -38,11 +39,17 @@ public class CustomerPassbookDaoImpl implements CustomerPassbookDao {
     public CustomerPassbook getCustomerPassbookByBillNo(long billno) {
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             session.beginTransaction();
-            String hql = "from CustomerPassbook where trid=:billno and particulars=:parti";
-
-            return session.createQuery(hql,CustomerPassbook.class).
-                    setParameter("trid",billno).
-                    setParameter("particulars","Bill no "+billno).getSingleResult();
+            String hql = "from CustomerPassbook where trid=:billno and particulars=:particulars";
+                CustomerPassbook book = null;
+                try{
+                    book = session.createQuery(hql,CustomerPassbook.class).
+                                    setParameter("billno",billno).
+                                    setParameter("particulars","Bill no "+billno).getSingleResult();
+                }catch(NoResultException nr)
+                {
+                    return null;
+                }
+            return book;
         }catch(Exception e)
         {
             e.printStackTrace();

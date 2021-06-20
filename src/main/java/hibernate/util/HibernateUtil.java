@@ -26,7 +26,7 @@ public class HibernateUtil {
 				setting.put(Environment.USER, "root");
 				setting.put(Environment.PASS, "2355");
 				setting.put(Environment.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
-				setting.put(Environment.SHOW_SQL, "true");
+				setting.put(Environment.SHOW_SQL, "false");
 				setting.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 				setting.put(Environment.HBM2DDL_AUTO, "update");
 				
