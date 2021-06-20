@@ -1,5 +1,7 @@
 package application.guiUtil;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.controlsfx.control.Notifications;
 
 import javafx.event.ActionEvent;
@@ -13,9 +15,9 @@ public class AlertNotification {
 	{
 		// /GurukrupaJewellors/src/resources/checked.png
 		try {
-		
+
 		Notifications message = Notifications.create()
-				.title("Success")					
+				.title("Success")
 				.text(msg)
 				.hideAfter(Duration.seconds(5))
 				.position(Pos.TOP_LEFT)
@@ -26,7 +28,8 @@ public class AlertNotification {
 						// TODO Auto-generated method stub
 					}
 				});
-		message.darkStyle();
+		//message.darkStyle();
+
 		message.showInformation();
 		} catch (Exception e) {
 			e.printStackTrace();

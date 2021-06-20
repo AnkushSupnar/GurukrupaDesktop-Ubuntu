@@ -90,18 +90,18 @@ public class BillDaoImpl implements BillDao {
     }
 
     @Override
-    public long saveBill(Bill bill) {
+    public int saveBill(Bill bill) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             if (bill.getBillno() == 0) {
-                long billno = (long) session.save(bill);
+                 session.save(bill);
                 session.getTransaction().commit();
-                return billno;
+                return 1;
             } else {
                 if (deleteTransactionByBillno(bill.getBillno()) == 1) {
-                    long billno =(long) session.save(bill);
+                     session.update(bill);
                     session.getTransaction().commit();
-                    return billno;
+                    return 2;
                 } else
                     return 0;
 
@@ -129,7 +129,7 @@ public class BillDaoImpl implements BillDao {
     }
 
     @Override
-    public long updateBill(Bill bill) {
+    public int updateBill(Bill bill) {
         return saveBill(bill);
     }
 }

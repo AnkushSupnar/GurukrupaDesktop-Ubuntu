@@ -17,10 +17,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import entity.reportEntities.OldBill;
 import entity.reportEntities.TransactionReport;
-import hibernate.entities.Bill;
-import hibernate.entities.Customer;
-import hibernate.entities.Item;
-import hibernate.entities.Transaction;
+import hibernate.entities.*;
 import hibernate.service.service.*;
 import hibernate.service.serviceimpl.*;
 import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
@@ -51,7 +48,7 @@ import javafx.util.Callback;
 
 public class BillingFrameController implements Initializable {
 
-    @FXML private MFXDatePicker date;
+    @FXML private DatePicker date;
     @FXML private MFXTextField txtCustomerName;
     @FXML private TextArea txtCustomerInfo;
     @FXML private MFXTextField txtItemName;
@@ -116,8 +113,8 @@ public class BillingFrameController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         trid = 1;
-        date.getDatePicker().setValue(LocalDate.now());
-        System.out.println(date.getDate());
+        date.setValue(LocalDate.now());
+        System.out.println(date.getValue());
         billno=0;
         customerService = new CustomerServiceImpl();
         itemService = new ItemServiceImpl();
@@ -403,11 +400,13 @@ public class BillingFrameController implements Initializable {
         Bill bill = new Bill();
         if(billno!=0)
             bill.setBillno(billno);
+        System.out.println("billno =====> "+billno);
+
         bill.setAmount(Double.parseDouble(txtGrandTotal.getText()));
         bill.setBank(bankService.getBankByBankName(cmbBank.getSelectionModel().getSelectedItem()));
         bill.setCgst(Double.parseDouble(txtCGST.getText()));
         bill.setCustomer(customerService.getCustomerByName(txtCustomerName.getText()));
-        bill.setDate(date.getDate());
+        bill.setDate(date.getValue());
         bill.setSgst(Double.parseDouble(txtSGST.getText()));
         bill.setDiscount(Double.parseDouble(txtDiscount.getText()));
         bill.setLogin(new LoginServiceImpl().getLoginById(1));
@@ -416,28 +415,31 @@ public class BillingFrameController implements Initializable {
 
         if(billno==0)
         {
-            long savedBill =billService.saveBill(bill);
+            int savedBill =billService.saveBill(bill);
             if(savedBill==1)
             {
                 message.showSuccessMessage("Bill no "+bill.getBillno()+" Saved Success");
+                saveCustomerPassbook(bill);
                 oldBillList.add(bill);
                 billList.add(
                         new OldBill(
                                 bill.getBillno(),
                                 bill.getDate(),
-                                bill.getCustomer().getFname()+" "+bill.getCustomer().getMname()+" "+bill.getCustomer().getLname(),
+                                bill.getCustomer().getFname() + " " + bill.getCustomer().getMname() + " " + bill.getCustomer().getLname(),
                                 bill.getAmount(),
                                 bill.getPaidamount(),
-                                bill.getAmount()-bill.getPaidamount()
+                                bill.getAmount() - bill.getPaidamount()
                         ));
                 clearBill();
             } else {
                 message.showErrorMessage("Error in Saving Bill");
             }
         } else {
-            long savedBill =billService.updateBill(bill);
+            int savedBill =billService.updateBill(bill);
+            System.out.println(billno+"for update=> "+bill.toString());
             if (savedBill ==2) {
                 message.showSuccessMessage("Bill" + bill.getBillno() + " Update Success");
+                saveCustomerPassbook(bill);
                 OldBill updated = new OldBill(
                         bill.getBillno(),
                         bill.getDate(),
@@ -468,6 +470,24 @@ public class BillingFrameController implements Initializable {
         }
 
     }
+
+    private void saveCustomerPassbook(Bill bill) {
+        CustomerPassbook book = null;
+        CustomerPassbookService bookService = new CustomerPassbookServiceImpl();
+        book = bookService.getCustomerPassbookByBillNo(bill.getBillno());
+        if(book==null) book  = new CustomerPassbook();
+        book.setTrid(bill.getBillno());
+        book.setDebit(bill.getAmount()-bill.getPaidamount());
+        book.setCustomer(bill.getCustomer());
+        book.setParticulars("Bill no "+bill.getBillno());
+        book.setCredit(bill.getPaidamount());
+        book.setDate(bill.getDate());
+        book.setBank(bill.getBank());
+
+        bookService.saveCustomerPassbook(book);
+
+    }
+
     @FXML
     void btnClearBillAction(ActionEvent event) {
         clearBill();
@@ -523,7 +543,7 @@ public class BillingFrameController implements Initializable {
     }
     private void clearBill() {
         billno=0;
-        date = new MFXDatePicker(LocalDate.now());
+        date.setValue(LocalDate.now());
         txtCustomerName.setText("");
         txtCustomerInfo.setText("");
         txtItemName.clear();

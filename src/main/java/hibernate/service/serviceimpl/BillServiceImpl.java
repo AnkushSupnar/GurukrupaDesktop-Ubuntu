@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class BillServiceImpl implements BillService {
-    BillDao dao;
+    private final BillDao dao;
     private final CustomerPassbookService bookService;
 
     public BillServiceImpl() {
@@ -50,41 +50,14 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public long saveBill(Bill bill) {
+    public int saveBill(Bill bill) {
         //add in customer passbook
-        CustomerPassbook book = new CustomerPassbook();
-        book.setBank(bill.getBank());
-        book.setCustomer(bill.getCustomer());
-        book.setDate(bill.getDate());
-        book.setCredit(bill.getPaidamount());
-        book.setDebit(bill.getAmount()-bill.getPaidamount());
-        long billno =dao.saveBill(bill);
-        if(billno!=0)
-        {
-            book.setTrid(billno);
-            book.setParticulars("Bill no "+bill.getBillno());
-            bookService.saveCustomerPassbook(book);
-
-            return 1;
-        }
-        else
-            return 0;
+        return dao.saveBill(bill);
     }
 
     @Override
-    public long updateBill(Bill bill) {
-        CustomerPassbook book = bookService.getCustomerPassbookByBillNo(bill.getBillno());
-        book.setBank(bill.getBank());
-        book.setCustomer(bill.getCustomer());
-        book.setDate(bill.getDate());
-        book.setCredit(bill.getPaidamount());
-        book.setDebit(bill.getAmount()-bill.getPaidamount());
-        book.setParticulars("Bill no "+bill.getBillno());
-        book.setTrid(bill.getBillno());
-        long billno =dao.updateBill(bill);
-        book.setTrid(billno);
-        bookService.saveCustomerPassbook(book);
-        return 2;
+    public int updateBill(Bill bill) {
+        return dao.updateBill(bill);
     }
 
     @Override

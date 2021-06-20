@@ -3,9 +3,9 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import io.github.palexdev.materialfx.controls.MFXComboBox?>
-<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -40,7 +40,11 @@
                         </HBox>
                         <HBox layoutX="10.0" layoutY="20.0">
                            <children>
-                              <MFXDatePicker fx:id="date" alignment="TOP_CENTER" colorText="true" />
+                              <DatePicker fx:id="date" prefHeight="24.0" prefWidth="118.0" styleClass="date-chooser" stylesheets="@../css/calendar.css">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </DatePicker>
                               <MFXTextField fx:id="txtCustomerName" lineStrokeCap="BUTT" lineStrokeWidth="1.0" prefHeight="24.0" prefWidth="289.0" promptText="Select Customer Name" validated="true">
                                  <HBox.margin>
                                     <Insets left="20.0" top="7.0" />
@@ -353,7 +357,7 @@
                               <Insets top="5.0" />
                            </padding>
                         </Label>
-                        <MFXComboBox fx:id="cmbBank" comboStyle="STYLE2" prefHeight="27.0" prefWidth="227.0" promptText="Select Bank Name">
+                        <MFXComboBox fx:id="cmbBank" comboStyle="STYLE1" prefHeight="27.0" prefWidth="227.0" promptText="Select Bank Name">
                            <HBox.margin>
                               <Insets left="5.0" />
                            </HBox.margin>

@@ -115,6 +115,9 @@ public class Customer {
 				+ ", houseno=" + houseno + ", street=" + street + ", city=" + city + ", taluka=" + taluka
 				+ ", district=" + district + ", pin=" + pin + ", contact=" + contact + "]";
 	}
-	
-	
+    public String toString2() {
+		return "Name=" + fname + " " + mname + " " + lname
+				+ ", houseno=" + houseno + ", street=" + street + ", city=" + city + ", taluka=" + taluka
+				+ ", district=" + district + ", pin=" + pin + ", contact=" + contact;
+    }
 }

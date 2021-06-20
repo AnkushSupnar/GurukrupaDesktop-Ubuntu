@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="640.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.transaction.ModeController">
+   <children>
+      <SplitPane dividerPositions="0.5845360824742268" layoutX="215.0" layoutY="14.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane fx:id="mainPanel" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <DatePicker fx:id="date" layoutX="6.0" layoutY="29.0" prefHeight="24.0" prefWidth="120.0" promptText="Select Date" />
+                  <Label layoutX="14.0" layoutY="5.0" text="Date" />
+                  <Label layoutX="147.0" layoutY="5.0" text="Customer Name" />
+                  <MFXTextField fx:id="txtCustomerName" layoutX="129.0" layoutY="27.0" lineStrokeWidth="1.0" prefHeight="26.0" prefWidth="243.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font></MFXTextField>
+                  <MFXButton fx:id="btnSearch" buttonType="RAISED" layoutX="375.0" layoutY="29.0" onAction="#btnSearchAction" text="SEARCH" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="SEARCH" size="15" />
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-info" />
+                     </styleClass></MFXButton>
+                  <TextArea fx:id="txtCustomerInfo" layoutX="6.0" layoutY="65.0" prefHeight="60.0" prefWidth="540.0" promptText="Customer Information" styleClass="text-primary" wrapText="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextArea>
+                  <Label layoutX="12.0" layoutY="133.0" text="Metal Name" />
+                  <HBox layoutX="14.0" layoutY="149.0">
+                     <children>
+                        <MFXComboBox fx:id="cmbMetalName" promptText="Select Metal" />
+                        <MFXTextField fx:id="txtWeight" lineStrokeWidth="1.0" prefWidth="100.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </MFXTextField>
+                        <MFXTextField fx:id="txtLess" lineStrokeWidth="1.0" prefWidth="100.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </MFXTextField>
+                        <MFXTextField fx:id="txtFinalWeight" editable="false" lineStrokeWidth="1.0" prefWidth="100.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </MFXTextField>
+                     </children>
+                  </HBox>
+                  <Label layoutX="144.0" layoutY="133.0" text="Weight" />
+                  <Label layoutX="276.0" layoutY="133.0" text="Less Weight" />
+                  <Label layoutX="405.0" layoutY="133.0" text="Final Weight" />
+                  <Label layoutX="159.0" layoutY="191.0" text="Amount" />
+                  <HBox layoutX="14.0" layoutY="211.0">
+                     <children>
+                        <MFXTextField fx:id="txtRate" lineStrokeWidth="1.0" prefWidth="100.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </MFXTextField>
+                        <MFXTextField fx:id="txtAmount" editable="false" lineStrokeWidth="1.0" prefWidth="100.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </MFXTextField>
+                        <MFXButton fx:id="btnAdd" buttonType="RAISED" onAction="#btnAddAction" text="ADD" textFill="WHITE">
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="15" />
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-success" />
+                           </styleClass>
+                        </MFXButton>
+                        <MFXButton fx:id="btnRemove" buttonType="RAISED" onAction="#btnRemoveAction" text="REMOVE" textFill="WHITE">
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="CLOSE" size="15" />
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-success" />
+                           </styleClass>
+                        </MFXButton>
+                        <MFXButton fx:id="btnClear" buttonType="RAISED" onAction="#btnClearAction" text="CLEAR" textFill="WHITE">
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="ERASER" size="15" />
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-success" />
+                           </styleClass>
+                        </MFXButton>
+                     </children>
+                  </HBox>
+                  <Label layoutX="20.0" layoutY="191.0" text="Rate/10gm" />
+                  <MFXButton fx:id="btnNew" buttonType="RAISED" layoutX="480.0" layoutY="29.0" onAction="#btnNewAction" text="NEW" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="SEARCH" size="15" />
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-info" />
+                     </styleClass>
+                  </MFXButton>
+                  <TableView fx:id="table" layoutX="14.0" layoutY="256.0" prefHeight="215.0" prefWidth="200.0" stylesheets="@../css/tableview.css" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="10.0">
+                    <columns>
+                      <TableColumn fx:id="colSrno" prefWidth="47.0" text="Sr No" />
+                      <TableColumn fx:id="colMetalName" prefWidth="100.0" text="Metal Name" />
+                        <TableColumn fx:id="colWeoght" prefWidth="63.0" text="Weight" />
+                        <TableColumn fx:id="colLess" prefWidth="78.0" text="Less" />
+                        <TableColumn fx:id="colTotalWeight" prefWidth="78.0" text="Weight" />
+                        <TableColumn fx:id="colRate" prefWidth="73.0" text="Rate" />
+                        <TableColumn fx:id="colAmount" prefWidth="90.0" text="Amount" />
+                    </columns>
+                  </TableView>
+                  <HBox layoutX="14.0" layoutY="535.0" AnchorPane.bottomAnchor="10.0">
+                     <children>
+                        <MFXButton fx:id="btnSave" buttonType="RAISED" onAction="#btnSaveAction" text="SAVE" textFill="WHITE">
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="SAVE" size="15" />
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-primary" />
+                           </styleClass>
+                        </MFXButton>
+                        <MFXButton fx:id="btnUpdate" buttonType="RAISED" onAction="#btnUpdate" text="UPDATE" textFill="WHITE">
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="EDIT" size="15" />
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-primary" />
+                           </styleClass>
+                        </MFXButton>
+                        <MFXButton fx:id="btnClear2" buttonType="RAISED" onAction="#btnClear2Action" text="CLEAR" textFill="WHITE">
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="CLOSE" size="15" />
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-primary" />
+                           </styleClass>
+                        </MFXButton>
+                        <MFXButton fx:id="btnPrint" buttonType="RAISED" onAction="#btnPrintAction" text="PRINT" textFill="WHITE">
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="PRINT" size="15" />
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-primary" />
+                           </styleClass>
+                        </MFXButton>
+                        <MFXButton fx:id="btnHome" buttonType="RAISED" onAction="#btnHomeAction" text="HOME" textFill="WHITE">
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="EDIT" size="15" />
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-primary" />
+                           </styleClass>
+                        </MFXButton>
+                     </children>
+                  </HBox>
+                  <Label layoutX="328.0" layoutY="479.0" text="Total Amount:" AnchorPane.rightAnchor="136.0" />
+                  <MFXTextField fx:id="txtTotal" editable="false" layoutX="430.0" layoutY="475.0" lineStrokeWidth="1.0" prefWidth="100.0" AnchorPane.rightAnchor="10.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </MFXTextField>
+                  <Label layoutX="14.0" layoutY="480.0" text="Payment from  Bank" />
+                  <Label layoutX="14.0" layoutY="539.0" text="Refference No" />
+                  <MFXTextField fx:id="txtRefference" editable="false" layoutX="14.0" layoutY="555.0" lineStrokeWidth="1.0" prefHeight="26.0" prefWidth="236.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </MFXTextField>
+                  <MFXComboBox fx:id="cmbBankName" layoutX="14.0" layoutY="502.0" maxPopupHeight="100.0" prefHeight="27.0" prefWidth="236.0" promptText="Select Bank Name" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

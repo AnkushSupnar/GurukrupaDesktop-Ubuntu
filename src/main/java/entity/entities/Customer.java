@@ -110,6 +110,4 @@ public class Customer {
 				+ ", houseno=" + houseno + ", street=" + street + ", city=" + city + ", taluka=" + taluka
 				+ ", district=" + district + ", pin=" + pin + ", contact=" + contact + "]";
 	}
-	
-	
 }
